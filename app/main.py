@@ -47,30 +47,27 @@ def load_prompt_template() -> str:
 
 
 def call_llm(prompt: str) -> str:
-    """Thin dispatcher so swapping LLM providers only touches this function."""
+    """Thin dispatcher so swapping LLM providers only touches this function.
+
+    Uses LangChain chat model wrappers (not raw provider SDKs) deliberately:
+    Phase 3 wraps this logic into LangGraph nodes, which expect the standard
+    LangChain .invoke() interface, tool-binding, and structured output support.
+    Building on that interface now avoids a rewrite later.
+    """
     if LLM_PROVIDER == "gemini":
-        import google.generativeai as genai
+        from langchain_google_genai import ChatGoogleGenerativeAI
 
         api_key = os.getenv("GOOGLE_API_KEY")
         if not api_key:
             raise EnvironmentError("GOOGLE_API_KEY not set in .env")
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel("gemini-3.5-flash")
-        response = model.generate_content(prompt)
+
+        model = ChatGoogleGenerativeAI(
+            model="gemini-3.5-flash",
+            google_api_key=api_key,
+        )
+        response = model.invoke(prompt)
         return response.text
 
-    elif LLM_PROVIDER == "openai":
-        from openai import OpenAI
-
-        api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            raise EnvironmentError("OPENAI_API_KEY not set in .env")
-        client = OpenAI(api_key=api_key)
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-        )
-        return response.choices[0].message.content
 
     else:
         raise ValueError(f"Unknown LLM_PROVIDER: {LLM_PROVIDER}")

@@ -30,20 +30,8 @@ def get_embedding_model():
 
         return GoogleGenerativeAIEmbeddings(
             model="models/gemini-embedding-2",
-            google_api_key=api_key,
         )
 
-    elif EMBEDDING_PROVIDER == "openai":
-        from langchain_openai import OpenAIEmbeddings
-
-        api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            raise EnvironmentError("OPENAI_API_KEY not set in .env")
-
-        return OpenAIEmbeddings(
-            model="text-embedding-3-small",
-            openai_api_key=api_key,
-        )
 
     else:
         raise ValueError(f"Unknown EMBEDDING_PROVIDER: {EMBEDDING_PROVIDER}")
