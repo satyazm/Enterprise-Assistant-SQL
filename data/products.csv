@@ -1,0 +1,19 @@
+product_id,product_name,product_line,category,unit_price,unit_cost,margin_pct
+PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,Audio,79.99,34.0,57.5
+PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,Charging,39.99,14.5,63.7
+PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,Displays,229.99,128.0,44.3
+PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,Smart Home,34.99,12.0,65.7
+PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,Wearables,59.99,24.0,60.0
+PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,Audio,49.99,19.0,62.0
+PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,Appliances,64.99,27.0,58.5
+PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,Cookware,149.99,62.0,58.7
+PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,Appliances,44.99,18.0,60.0
+PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,Bedding,59.99,21.0,65.0
+PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,Kitchen Tools,24.99,9.0,64.0
+PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,Appliances,89.99,39.0,56.7
+PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,Footwear,94.99,38.0,60.0
+PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,Outerwear,74.99,29.0,61.3
+PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,Tops,54.99,21.0,61.8
+PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,Outerwear,84.99,33.0,61.2
+PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,Bottoms,39.99,14.0,65.0
+PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,Footwear,109.99,46.0,58.2

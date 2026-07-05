@@ -1,0 +1,481 @@
+sale_id,sale_date,customer_id,product_id,product_name,product_line,quantity,unit_price,discount_pct,line_total,channel,region
+SALE-000001,2024-02-05,CUST-00054,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,2,54.99,15,93.48,In-Store,West
+SALE-000002,2024-06-04,CUST-00105,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,0,84.99,In-Store,Midwest
+SALE-000003,2024-02-07,CUST-00184,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,2,74.99,0,149.98,In-Store,Northeast
+SALE-000004,2024-08-02,CUST-00150,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,In-Store,Northeast
+SALE-000005,2024-02-13,CUST-00093,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,2,109.99,0,219.98,Online,Midwest
+SALE-000006,2024-01-23,CUST-00171,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,0,89.99,In-Store,Midwest
+SALE-000007,2024-06-18,CUST-00166,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,5,94.99,25,356.21,Online,West
+SALE-000008,2024-09-18,CUST-00003,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,10,31.49,In-Store,South
+SALE-000009,2024-07-19,CUST-00177,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,In-Store,Northeast
+SALE-000010,2024-01-13,CUST-00177,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,0,39.99,Online,Northeast
+SALE-000011,2024-03-13,CUST-00022,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,3,34.99,0,104.97,Online,West
+SALE-000012,2024-06-27,CUST-00201,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,0,64.99,Online,Midwest
+SALE-000013,2024-06-02,CUST-00179,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,1,54.99,0,54.99,In-Store,Midwest
+SALE-000014,2024-03-25,CUST-00006,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,2,24.99,20,39.98,In-Store,Midwest
+SALE-000015,2024-06-18,CUST-00133,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,2,49.99,0,99.98,Marketplace,Midwest
+SALE-000016,2024-04-05,CUST-00060,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,2,94.99,10,170.98,Online,South
+SALE-000017,2024-08-07,CUST-00008,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,0,64.99,In-Store,West
+SALE-000018,2024-02-02,CUST-00053,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,2,44.99,0,89.98,In-Store,Midwest
+SALE-000019,2024-04-10,CUST-00138,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,0,49.99,Online,Northeast
+SALE-000020,2024-06-09,CUST-00126,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,5,39.99,0,199.95,In-Store,Midwest
+SALE-000021,2024-08-22,CUST-00151,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,10,31.49,In-Store,Northeast
+SALE-000022,2024-02-13,CUST-00181,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,4,59.99,10,215.96,Online,Northeast
+SALE-000023,2024-07-10,CUST-00062,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,10,53.99,In-Store,Midwest
+SALE-000024,2024-08-04,CUST-00108,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,2,59.99,0,119.98,In-Store,Midwest
+SALE-000025,2024-09-07,CUST-00178,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,2,49.99,0,99.98,Online,West
+SALE-000026,2024-07-02,CUST-00216,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,2,54.99,25,82.48,In-Store,Midwest
+SALE-000027,2024-09-15,CUST-00050,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,5,94.99,10,427.45,Online,West
+SALE-000028,2024-08-15,CUST-00126,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,2,74.99,0,149.98,Online,Midwest
+SALE-000029,2024-05-20,CUST-00008,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,Online,West
+SALE-000030,2024-09-10,CUST-00200,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,2,54.99,0,109.98,Online,South
+SALE-000031,2024-07-06,CUST-00030,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,2,44.99,0,89.98,In-Store,Midwest
+SALE-000032,2024-08-05,CUST-00195,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,1,54.99,0,54.99,In-Store,South
+SALE-000033,2024-01-17,CUST-00193,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,Online,South
+SALE-000034,2024-03-01,CUST-00210,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,15,195.49,Online,West
+SALE-000035,2024-08-07,CUST-00208,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,3,89.99,0,269.97,Online,South
+SALE-000036,2024-06-28,CUST-00053,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,3,64.99,0,194.97,In-Store,Midwest
+SALE-000037,2024-05-29,CUST-00044,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,5,24.99,0,124.95,Online,South
+SALE-000038,2024-02-18,CUST-00220,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,5,39.99,0,199.95,In-Store,Northeast
+SALE-000039,2024-03-05,CUST-00106,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,5,39.99,10,179.96,Online,South
+SALE-000040,2024-07-20,CUST-00038,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,3,24.99,0,74.97,In-Store,Midwest
+SALE-000041,2024-02-08,CUST-00069,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,1,74.99,10,67.49,Marketplace,South
+SALE-000042,2024-05-22,CUST-00024,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,10,85.49,Marketplace,Northeast
+SALE-000043,2024-01-02,CUST-00117,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,15,72.24,In-Store,West
+SALE-000044,2024-07-02,CUST-00024,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,2,54.99,15,93.48,In-Store,Northeast
+SALE-000045,2024-04-18,CUST-00102,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,5,64.99,0,324.95,Online,West
+SALE-000046,2024-03-07,CUST-00073,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,In-Store,South
+SALE-000047,2024-08-23,CUST-00088,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,0,39.99,Marketplace,Midwest
+SALE-000048,2024-08-07,CUST-00041,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,1,54.99,0,54.99,In-Store,Northeast
+SALE-000049,2024-05-20,CUST-00034,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,0,59.99,Online,Northeast
+SALE-000050,2024-03-25,CUST-00022,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,2,89.99,0,179.98,In-Store,West
+SALE-000051,2024-02-16,CUST-00186,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,10,134.99,Online,West
+SALE-000052,2024-04-25,CUST-00123,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,Online,Northeast
+SALE-000053,2024-08-04,CUST-00003,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,3,24.99,10,67.47,In-Store,South
+SALE-000054,2024-02-22,CUST-00059,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Online,Northeast
+SALE-000055,2024-03-09,CUST-00077,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,10,53.99,In-Store,South
+SALE-000056,2024-03-25,CUST-00018,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,2,39.99,0,79.98,In-Store,West
+SALE-000057,2024-08-14,CUST-00161,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,4,59.99,15,203.97,Online,Northeast
+SALE-000058,2024-07-15,CUST-00026,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,2,59.99,0,119.98,Online,Northeast
+SALE-000059,2024-02-13,CUST-00203,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,0,59.99,In-Store,South
+SALE-000060,2024-01-14,CUST-00185,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,2,59.99,15,101.98,In-Store,South
+SALE-000061,2024-09-17,CUST-00078,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,0,64.99,Online,South
+SALE-000062,2024-05-02,CUST-00166,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,2,39.99,0,79.98,Online,West
+SALE-000063,2024-01-07,CUST-00128,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,25,172.49,Marketplace,Northeast
+SALE-000064,2024-08-03,CUST-00034,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,3,94.99,0,284.97,In-Store,Northeast
+SALE-000065,2024-02-07,CUST-00196,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,4,84.99,0,339.96,Online,Northeast
+SALE-000066,2024-01-31,CUST-00068,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,20,51.99,Online,Midwest
+SALE-000067,2024-08-04,CUST-00074,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,2,39.99,10,71.98,Online,Midwest
+SALE-000068,2024-05-22,CUST-00138,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,2,109.99,0,219.98,Online,Northeast
+SALE-000069,2024-07-19,CUST-00053,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,0,59.99,In-Store,Midwest
+SALE-000070,2024-08-11,CUST-00167,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,10,206.99,In-Store,Northeast
+SALE-000071,2024-08-10,CUST-00015,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,In-Store,South
+SALE-000072,2024-03-30,CUST-00015,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,2,59.99,0,119.98,In-Store,South
+SALE-000073,2024-06-26,CUST-00180,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,In-Store,West
+SALE-000074,2024-03-05,CUST-00185,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,10,40.49,Marketplace,South
+SALE-000075,2024-01-16,CUST-00188,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,2,34.99,0,69.98,Online,West
+SALE-000076,2024-02-09,CUST-00135,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,In-Store,West
+SALE-000077,2024-03-26,CUST-00015,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,3,84.99,0,254.97,Online,South
+SALE-000078,2024-09-17,CUST-00027,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,Marketplace,Northeast
+SALE-000079,2024-07-05,CUST-00004,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,Online,Midwest
+SALE-000080,2024-08-02,CUST-00220,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,2,39.99,0,79.98,Online,Northeast
+SALE-000081,2024-02-09,CUST-00185,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,Online,South
+SALE-000082,2024-09-21,CUST-00173,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,25,29.99,Marketplace,West
+SALE-000083,2024-06-08,CUST-00018,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,3,54.99,0,164.97,In-Store,West
+SALE-000084,2024-06-04,CUST-00003,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,10,80.99,Online,South
+SALE-000085,2024-04-10,CUST-00095,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,5,84.99,10,382.45,In-Store,South
+SALE-000086,2024-07-28,CUST-00204,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,In-Store,West
+SALE-000087,2024-01-01,CUST-00163,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,4,79.99,15,271.97,Online,West
+SALE-000088,2024-09-28,CUST-00189,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,25,44.99,Online,South
+SALE-000089,2024-02-17,CUST-00016,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,2,59.99,0,119.98,Online,Midwest
+SALE-000090,2024-07-09,CUST-00217,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,0,39.99,In-Store,South
+SALE-000091,2024-07-20,CUST-00149,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,In-Store,Midwest
+SALE-000092,2024-05-13,CUST-00112,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,15,50.99,Marketplace,Midwest
+SALE-000093,2024-05-19,CUST-00101,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,Marketplace,Northeast
+SALE-000094,2024-03-25,CUST-00035,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,Online,Northeast
+SALE-000095,2024-04-16,CUST-00031,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,0,109.99,In-Store,South
+SALE-000096,2024-06-04,CUST-00219,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,15,29.74,In-Store,West
+SALE-000097,2024-06-16,CUST-00011,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,3,64.99,0,194.97,In-Store,Midwest
+SALE-000098,2024-06-02,CUST-00092,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Marketplace,South
+SALE-000099,2024-05-07,CUST-00008,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,3,94.99,0,284.97,Online,West
+SALE-000100,2024-02-01,CUST-00204,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,15,50.99,Marketplace,West
+SALE-000101,2024-07-09,CUST-00034,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,3,64.99,10,175.47,Marketplace,Northeast
+SALE-000102,2024-02-08,CUST-00022,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,4,44.99,0,179.96,Online,West
+SALE-000103,2024-02-17,CUST-00166,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,3,54.99,20,131.98,In-Store,West
+SALE-000104,2024-08-24,CUST-00085,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,Marketplace,West
+SALE-000105,2024-07-14,CUST-00111,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,10,85.49,Online,Northeast
+SALE-000106,2024-08-16,CUST-00055,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,20,39.99,Online,Northeast
+SALE-000107,2024-09-12,CUST-00159,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,2,149.99,0,299.98,In-Store,Northeast
+SALE-000108,2024-03-11,CUST-00016,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,In-Store,Midwest
+SALE-000109,2024-01-10,CUST-00205,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,25,29.99,In-Store,Northeast
+SALE-000110,2024-09-05,CUST-00092,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,0,84.99,In-Store,South
+SALE-000111,2024-01-14,CUST-00083,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Online,Midwest
+SALE-000112,2024-08-29,CUST-00208,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,0,44.99,In-Store,South
+SALE-000113,2024-05-03,CUST-00060,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,0,49.99,In-Store,South
+SALE-000114,2024-04-22,CUST-00189,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,2,39.99,0,79.98,Marketplace,South
+SALE-000115,2024-03-29,CUST-00100,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,4,89.99,0,359.96,In-Store,Midwest
+SALE-000116,2024-01-15,CUST-00207,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,4,89.99,10,323.96,Online,West
+SALE-000117,2024-04-06,CUST-00146,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,2,59.99,15,101.98,In-Store,Midwest
+SALE-000118,2024-09-08,CUST-00127,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,0,109.99,Online,Midwest
+SALE-000119,2024-09-01,CUST-00155,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,Marketplace,South
+SALE-000120,2024-03-31,CUST-00052,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,20,47.99,In-Store,Northeast
+SALE-000121,2024-03-13,CUST-00083,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,15,33.99,In-Store,Midwest
+SALE-000122,2024-07-21,CUST-00094,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,Online,Northeast
+SALE-000123,2024-08-11,CUST-00083,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,5,59.99,15,254.96,Marketplace,Midwest
+SALE-000124,2024-07-01,CUST-00167,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,In-Store,Northeast
+SALE-000125,2024-05-30,CUST-00045,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,In-Store,Northeast
+SALE-000126,2024-01-17,CUST-00180,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,3,94.99,0,284.97,Online,West
+SALE-000127,2024-02-23,CUST-00208,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,2,149.99,20,239.98,Online,South
+SALE-000128,2024-06-12,CUST-00191,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,Marketplace,Northeast
+SALE-000129,2024-05-15,CUST-00023,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,In-Store,Midwest
+SALE-000130,2024-01-01,CUST-00090,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,2,44.99,0,89.98,Online,Northeast
+SALE-000131,2024-09-09,CUST-00108,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,3,49.99,20,119.98,Online,Midwest
+SALE-000132,2024-04-25,CUST-00097,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,3,34.99,0,104.97,Online,Northeast
+SALE-000133,2024-06-12,CUST-00217,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,0,39.99,Online,South
+SALE-000134,2024-03-23,CUST-00088,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,3,49.99,10,134.97,In-Store,Midwest
+SALE-000135,2024-09-04,CUST-00024,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,2,24.99,10,44.98,Online,Northeast
+SALE-000136,2024-08-10,CUST-00168,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,2,49.99,0,99.98,Online,West
+SALE-000137,2024-05-15,CUST-00053,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,10,58.49,Online,Midwest
+SALE-000138,2024-09-08,CUST-00025,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,0,39.99,Online,Midwest
+SALE-000139,2024-09-02,CUST-00110,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,Online,South
+SALE-000140,2024-08-30,CUST-00044,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,5,59.99,15,254.96,Online,South
+SALE-000141,2024-05-15,CUST-00102,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,0,84.99,In-Store,West
+SALE-000142,2024-07-08,CUST-00048,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,3,89.99,0,269.97,Online,South
+SALE-000143,2024-05-17,CUST-00113,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,1,54.99,0,54.99,Online,South
+SALE-000144,2024-06-25,CUST-00179,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,15,29.74,Online,Midwest
+SALE-000145,2024-07-17,CUST-00194,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,2,149.99,15,254.98,Online,West
+SALE-000146,2024-04-30,CUST-00138,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,2,84.99,0,169.98,Online,Northeast
+SALE-000147,2024-09-21,CUST-00219,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,15,33.99,In-Store,West
+SALE-000148,2024-08-17,CUST-00159,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,0,59.99,Marketplace,Northeast
+SALE-000149,2024-08-04,CUST-00055,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,0,64.99,In-Store,Northeast
+SALE-000150,2024-05-12,CUST-00052,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,3,59.99,0,179.97,In-Store,Northeast
+SALE-000151,2024-07-22,CUST-00207,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,Marketplace,West
+SALE-000152,2024-01-07,CUST-00134,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,4,54.99,15,186.97,In-Store,Midwest
+SALE-000153,2024-03-17,CUST-00134,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,1,74.99,0,74.99,In-Store,Midwest
+SALE-000154,2024-02-21,CUST-00195,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,4,34.99,15,118.97,Marketplace,South
+SALE-000155,2024-09-05,CUST-00089,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,1,74.99,0,74.99,In-Store,Midwest
+SALE-000156,2024-07-24,CUST-00045,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,0,44.99,Marketplace,Northeast
+SALE-000157,2024-08-31,CUST-00085,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,20,119.99,Marketplace,West
+SALE-000158,2024-06-04,CUST-00006,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,3,24.99,0,74.97,In-Store,Midwest
+SALE-000159,2024-04-26,CUST-00220,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,5,34.99,0,174.95,Marketplace,Northeast
+SALE-000160,2024-08-01,CUST-00114,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,10,22.49,Online,Northeast
+SALE-000161,2024-07-27,CUST-00114,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,4,64.99,10,233.96,In-Store,Northeast
+SALE-000162,2024-03-22,CUST-00096,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,0,39.99,In-Store,Midwest
+SALE-000163,2024-09-25,CUST-00104,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,2,59.99,20,95.98,Online,South
+SALE-000164,2024-05-07,CUST-00050,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,3,64.99,0,194.97,Online,West
+SALE-000165,2024-08-25,CUST-00093,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,0,64.99,In-Store,Midwest
+SALE-000166,2024-09-07,CUST-00032,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,Online,West
+SALE-000167,2024-03-24,CUST-00122,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,15,93.49,Online,Northeast
+SALE-000168,2024-07-16,CUST-00213,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,Marketplace,Northeast
+SALE-000169,2024-04-25,CUST-00200,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,3,64.99,10,175.47,Online,South
+SALE-000170,2024-01-05,CUST-00105,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,0,39.99,Online,Midwest
+SALE-000171,2024-06-05,CUST-00045,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,10,71.99,In-Store,Northeast
+SALE-000172,2024-06-27,CUST-00071,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,3,74.99,0,224.97,Online,Northeast
+SALE-000173,2024-07-22,CUST-00078,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,3,39.99,0,119.97,Online,South
+SALE-000174,2024-05-24,CUST-00170,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,2,89.99,0,179.98,Online,West
+SALE-000175,2024-06-15,CUST-00017,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,5,24.99,15,106.21,Online,Midwest
+SALE-000176,2024-09-21,CUST-00183,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,15,50.99,Marketplace,West
+SALE-000177,2024-03-12,CUST-00207,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,2,94.99,10,170.98,In-Store,West
+SALE-000178,2024-07-26,CUST-00076,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,4,44.99,0,179.96,Online,South
+SALE-000179,2024-04-23,CUST-00182,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,10,58.49,In-Store,Midwest
+SALE-000180,2024-03-28,CUST-00122,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,15,76.49,Marketplace,Northeast
+SALE-000181,2024-03-06,CUST-00047,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,10,53.99,In-Store,Northeast
+SALE-000182,2024-06-20,CUST-00144,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,4,49.99,10,179.96,Online,West
+SALE-000183,2024-06-18,CUST-00058,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,0,59.99,In-Store,Midwest
+SALE-000184,2024-02-06,CUST-00119,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,Online,South
+SALE-000185,2024-07-30,CUST-00031,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Marketplace,South
+SALE-000186,2024-08-22,CUST-00036,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,0,64.99,Marketplace,Northeast
+SALE-000187,2024-03-31,CUST-00047,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,Online,Northeast
+SALE-000188,2024-03-27,CUST-00116,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,0,44.99,Online,West
+SALE-000189,2024-08-10,CUST-00202,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,10,206.99,Online,Northeast
+SALE-000190,2024-09-30,CUST-00123,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Online,Northeast
+SALE-000191,2024-09-28,CUST-00004,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,2,24.99,0,49.98,In-Store,Midwest
+SALE-000192,2024-06-25,CUST-00161,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,Online,Northeast
+SALE-000193,2024-01-24,CUST-00129,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,0,59.99,Online,Midwest
+SALE-000194,2024-06-21,CUST-00187,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,2,39.99,0,79.98,In-Store,Northeast
+SALE-000195,2024-09-07,CUST-00035,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,5,24.99,0,124.95,Online,Northeast
+SALE-000196,2024-04-24,CUST-00208,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,10,85.49,Online,South
+SALE-000197,2024-03-27,CUST-00188,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,2,79.99,0,159.98,In-Store,West
+SALE-000198,2024-05-10,CUST-00203,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,15,33.99,In-Store,South
+SALE-000199,2024-01-11,CUST-00153,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,2,39.99,0,79.98,Online,Northeast
+SALE-000200,2024-05-09,CUST-00114,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Online,Northeast
+SALE-000201,2024-02-21,CUST-00178,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,10,71.99,Online,West
+SALE-000202,2024-02-23,CUST-00156,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,0,59.99,In-Store,West
+SALE-000203,2024-09-11,CUST-00073,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,2,34.99,0,69.98,Online,South
+SALE-000204,2024-07-02,CUST-00068,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,5,39.99,10,179.96,Online,Midwest
+SALE-000205,2024-04-16,CUST-00011,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,10,98.99,In-Store,Midwest
+SALE-000206,2024-02-15,CUST-00061,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,20,63.99,In-Store,Midwest
+SALE-000207,2024-02-16,CUST-00172,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,15,72.24,Online,West
+SALE-000208,2024-04-28,CUST-00186,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,4,34.99,0,139.96,Marketplace,West
+SALE-000209,2024-03-30,CUST-00068,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,1,54.99,20,43.99,Marketplace,Midwest
+SALE-000210,2024-02-29,CUST-00093,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,In-Store,Midwest
+SALE-000211,2024-03-28,CUST-00012,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,3,79.99,0,239.97,Marketplace,Northeast
+SALE-000212,2024-02-17,CUST-00160,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,3,44.99,0,134.97,Online,West
+SALE-000213,2024-08-21,CUST-00030,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Online,Midwest
+SALE-000214,2024-03-26,CUST-00218,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,2,84.99,0,169.98,In-Store,West
+SALE-000215,2024-09-04,CUST-00016,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,15,42.49,In-Store,Midwest
+SALE-000216,2024-01-15,CUST-00047,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,2,94.99,15,161.48,Marketplace,Northeast
+SALE-000217,2024-09-06,CUST-00187,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,0,59.99,Online,Northeast
+SALE-000218,2024-06-09,CUST-00012,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,Marketplace,Northeast
+SALE-000219,2024-06-22,CUST-00135,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,5,149.99,0,749.95,In-Store,West
+SALE-000220,2024-05-07,CUST-00159,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,In-Store,Northeast
+SALE-000221,2024-01-28,CUST-00165,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Marketplace,West
+SALE-000222,2024-03-25,CUST-00130,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,3,84.99,0,254.97,In-Store,South
+SALE-000223,2024-01-26,CUST-00062,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,5,24.99,0,124.95,In-Store,Midwest
+SALE-000224,2024-02-10,CUST-00097,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,3,94.99,0,284.97,In-Store,Northeast
+SALE-000225,2024-08-16,CUST-00115,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,3,229.99,0,689.97,Marketplace,Midwest
+SALE-000226,2024-07-30,CUST-00191,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,In-Store,Northeast
+SALE-000227,2024-06-04,CUST-00212,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,2,229.99,20,367.98,In-Store,West
+SALE-000228,2024-07-05,CUST-00168,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,4,54.99,15,186.97,In-Store,West
+SALE-000229,2024-08-30,CUST-00217,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,1,54.99,10,49.49,Online,South
+SALE-000230,2024-04-23,CUST-00116,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,Online,West
+SALE-000231,2024-07-10,CUST-00163,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,10,53.99,Online,West
+SALE-000232,2024-07-28,CUST-00043,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,0,84.99,In-Store,Northeast
+SALE-000233,2024-07-20,CUST-00049,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,4,34.99,0,139.96,In-Store,South
+SALE-000234,2024-07-31,CUST-00049,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,In-Store,South
+SALE-000235,2024-08-18,CUST-00173,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,2,34.99,0,69.98,In-Store,West
+SALE-000236,2024-01-03,CUST-00130,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,5,59.99,0,299.95,Online,South
+SALE-000237,2024-03-31,CUST-00111,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,4,84.99,10,305.96,Online,Northeast
+SALE-000238,2024-06-13,CUST-00209,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,0,59.99,Online,South
+SALE-000239,2024-06-24,CUST-00156,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,25,112.49,In-Store,West
+SALE-000240,2024-09-19,CUST-00035,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,0,59.99,In-Store,Northeast
+SALE-000241,2024-04-12,CUST-00081,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,2,109.99,0,219.98,In-Store,South
+SALE-000242,2024-03-08,CUST-00176,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,4,89.99,25,269.97,In-Store,South
+SALE-000243,2024-06-14,CUST-00046,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,10,35.99,In-Store,South
+SALE-000244,2024-08-01,CUST-00144,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,2,84.99,10,152.98,Marketplace,West
+SALE-000245,2024-08-04,CUST-00137,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,3,59.99,15,152.97,In-Store,Northeast
+SALE-000246,2024-01-29,CUST-00007,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,In-Store,Northeast
+SALE-000247,2024-03-15,CUST-00042,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,2,59.99,15,101.98,In-Store,West
+SALE-000248,2024-01-17,CUST-00076,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,2,64.99,0,129.98,In-Store,South
+SALE-000249,2024-07-18,CUST-00158,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,3,109.99,0,329.97,In-Store,Midwest
+SALE-000250,2024-01-25,CUST-00205,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,2,59.99,20,95.98,Online,Northeast
+SALE-000251,2024-01-28,CUST-00202,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,5,24.99,0,124.95,Online,Northeast
+SALE-000252,2024-07-07,CUST-00159,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,3,54.99,15,140.22,In-Store,Northeast
+SALE-000253,2024-04-09,CUST-00155,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,2,64.99,0,129.98,Online,South
+SALE-000254,2024-03-29,CUST-00175,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,10,206.99,Online,South
+SALE-000255,2024-05-15,CUST-00011,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,1,74.99,0,74.99,In-Store,Midwest
+SALE-000256,2024-03-20,CUST-00066,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,Marketplace,West
+SALE-000257,2024-06-03,CUST-00153,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,2,39.99,0,79.98,In-Store,Northeast
+SALE-000258,2024-06-11,CUST-00092,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,2,229.99,0,459.98,Marketplace,South
+SALE-000259,2024-03-22,CUST-00134,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,2,229.99,0,459.98,In-Store,Midwest
+SALE-000260,2024-04-19,CUST-00024,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,10,80.99,Online,Northeast
+SALE-000261,2024-09-28,CUST-00076,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,4,64.99,0,259.96,In-Store,South
+SALE-000262,2024-06-26,CUST-00193,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,Marketplace,South
+SALE-000263,2024-06-13,CUST-00158,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,4,149.99,0,599.96,In-Store,Midwest
+SALE-000264,2024-05-24,CUST-00030,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,In-Store,Midwest
+SALE-000265,2024-09-17,CUST-00198,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,0,89.99,Online,South
+SALE-000266,2024-02-12,CUST-00167,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,20,51.99,Online,Northeast
+SALE-000267,2024-02-03,CUST-00198,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,0,109.99,In-Store,South
+SALE-000268,2024-04-15,CUST-00055,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,3,74.99,0,224.97,In-Store,Northeast
+SALE-000269,2024-02-06,CUST-00190,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,2,74.99,10,134.98,Online,Midwest
+SALE-000270,2024-02-07,CUST-00118,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,In-Store,Northeast
+SALE-000271,2024-04-26,CUST-00143,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,2,229.99,20,367.98,Online,Midwest
+SALE-000272,2024-01-09,CUST-00116,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Online,West
+SALE-000273,2024-01-24,CUST-00002,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,2,229.99,10,413.98,Online,South
+SALE-000274,2024-06-03,CUST-00129,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,10,31.49,Online,Midwest
+SALE-000275,2024-01-16,CUST-00113,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,In-Store,South
+SALE-000276,2024-05-31,CUST-00035,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,2,94.99,25,142.48,Online,Northeast
+SALE-000277,2024-01-06,CUST-00174,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,4,89.99,0,359.96,In-Store,South
+SALE-000278,2024-07-20,CUST-00032,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,0,39.99,Marketplace,West
+SALE-000279,2024-06-25,CUST-00079,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,2,64.99,0,129.98,Marketplace,West
+SALE-000280,2024-04-04,CUST-00218,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,0,39.99,In-Store,West
+SALE-000281,2024-01-28,CUST-00050,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,15,29.74,Marketplace,West
+SALE-000282,2024-02-07,CUST-00141,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,2,54.99,0,109.98,Online,Midwest
+SALE-000283,2024-09-06,CUST-00026,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,2,64.99,25,97.48,Online,Northeast
+SALE-000284,2024-02-05,CUST-00172,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,20,119.99,Online,West
+SALE-000285,2024-06-05,CUST-00116,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,2,24.99,10,44.98,Online,West
+SALE-000286,2024-08-07,CUST-00146,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,3,89.99,0,269.97,Online,Midwest
+SALE-000287,2024-08-11,CUST-00202,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,2,149.99,0,299.98,Online,Northeast
+SALE-000288,2024-08-24,CUST-00174,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,3,24.99,0,74.97,In-Store,South
+SALE-000289,2024-02-11,CUST-00125,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,15,93.49,Marketplace,South
+SALE-000290,2024-02-09,CUST-00036,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,10,98.99,Marketplace,Northeast
+SALE-000291,2024-07-26,CUST-00218,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,2,39.99,15,67.98,Online,West
+SALE-000292,2024-08-29,CUST-00010,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,10,98.99,Online,Northeast
+SALE-000293,2024-05-28,CUST-00101,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,3,149.99,0,449.97,In-Store,Northeast
+SALE-000294,2024-01-06,CUST-00024,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,10,85.49,In-Store,Northeast
+SALE-000295,2024-03-12,CUST-00207,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,2,49.99,0,99.98,Online,West
+SALE-000296,2024-09-04,CUST-00145,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,2,59.99,20,95.98,Online,West
+SALE-000297,2024-05-15,CUST-00195,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,0,84.99,Online,South
+SALE-000298,2024-07-03,CUST-00053,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,4,39.99,0,159.96,Marketplace,Midwest
+SALE-000299,2024-06-14,CUST-00012,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,5,39.99,0,199.95,Marketplace,Northeast
+SALE-000300,2024-05-14,CUST-00163,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,3,44.99,0,134.97,In-Store,West
+SALE-000301,2024-02-09,CUST-00097,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Online,Northeast
+SALE-000302,2024-06-25,CUST-00058,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,0,39.99,In-Store,Midwest
+SALE-000303,2024-03-12,CUST-00155,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,Online,South
+SALE-000304,2024-04-05,CUST-00132,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,0,44.99,In-Store,Midwest
+SALE-000305,2024-07-31,CUST-00210,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,2,34.99,15,59.48,In-Store,West
+SALE-000306,2024-03-23,CUST-00124,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,10,76.49,Online,West
+SALE-000307,2024-03-23,CUST-00063,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,0,39.99,In-Store,South
+SALE-000308,2024-05-12,CUST-00147,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,20,47.99,In-Store,South
+SALE-000309,2024-05-25,CUST-00104,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,3,79.99,20,191.98,Online,South
+SALE-000310,2024-03-28,CUST-00156,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,3,84.99,0,254.97,Online,West
+SALE-000311,2024-09-18,CUST-00037,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,2,49.99,0,99.98,In-Store,South
+SALE-000312,2024-02-05,CUST-00088,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,2,54.99,0,109.98,Online,Midwest
+SALE-000313,2024-09-15,CUST-00028,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,10,71.99,In-Store,Northeast
+SALE-000314,2024-01-20,CUST-00156,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,20,27.99,In-Store,West
+SALE-000315,2024-03-07,CUST-00193,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,20,27.99,In-Store,South
+SALE-000316,2024-07-08,CUST-00001,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,1,74.99,20,59.99,In-Store,Northeast
+SALE-000317,2024-09-03,CUST-00110,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,4,149.99,15,509.97,Online,South
+SALE-000318,2024-05-10,CUST-00151,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,Online,Northeast
+SALE-000319,2024-07-28,CUST-00220,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,Online,Northeast
+SALE-000320,2024-03-01,CUST-00191,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,2,79.99,0,159.98,Online,Northeast
+SALE-000321,2024-02-24,CUST-00053,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,In-Store,Midwest
+SALE-000322,2024-08-04,CUST-00065,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,3,44.99,0,134.97,In-Store,Northeast
+SALE-000323,2024-07-30,CUST-00175,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,2,94.99,0,189.98,In-Store,South
+SALE-000324,2024-09-04,CUST-00046,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,2,89.99,0,179.98,Online,South
+SALE-000325,2024-03-01,CUST-00089,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,2,94.99,10,170.98,Online,Midwest
+SALE-000326,2024-09-17,CUST-00180,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,0,49.99,Online,West
+SALE-000327,2024-01-03,CUST-00141,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,15,33.99,In-Store,Midwest
+SALE-000328,2024-05-14,CUST-00121,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,1,74.99,0,74.99,Online,West
+SALE-000329,2024-07-24,CUST-00010,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,4,94.99,10,341.96,In-Store,Northeast
+SALE-000330,2024-03-30,CUST-00183,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,4,39.99,10,143.96,Online,West
+SALE-000331,2024-01-18,CUST-00052,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,15,33.99,In-Store,Northeast
+SALE-000332,2024-01-19,CUST-00179,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,2,149.99,0,299.98,In-Store,Midwest
+SALE-000333,2024-07-23,CUST-00041,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,5,229.99,0,1149.95,Online,Northeast
+SALE-000334,2024-02-05,CUST-00151,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,20,51.99,In-Store,Northeast
+SALE-000335,2024-06-27,CUST-00186,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,4,109.99,0,439.96,In-Store,West
+SALE-000336,2024-07-25,CUST-00058,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,0,64.99,Online,Midwest
+SALE-000337,2024-02-07,CUST-00105,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,0,39.99,Online,Midwest
+SALE-000338,2024-05-08,CUST-00030,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,4,39.99,10,143.96,Marketplace,Midwest
+SALE-000339,2024-06-22,CUST-00145,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,2,84.99,25,127.48,In-Store,West
+SALE-000340,2024-05-12,CUST-00118,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,In-Store,Northeast
+SALE-000341,2024-07-30,CUST-00057,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,3,149.99,25,337.48,In-Store,Midwest
+SALE-000342,2024-02-17,CUST-00003,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,0,44.99,In-Store,South
+SALE-000343,2024-04-01,CUST-00088,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,2,229.99,0,459.98,Online,Midwest
+SALE-000344,2024-04-07,CUST-00147,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,0,44.99,Online,South
+SALE-000345,2024-04-15,CUST-00189,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,3,149.99,0,449.97,In-Store,South
+SALE-000346,2024-02-24,CUST-00215,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,0,89.99,Online,West
+SALE-000347,2024-01-22,CUST-00170,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,2,84.99,15,144.48,Online,West
+SALE-000348,2024-05-20,CUST-00081,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,3,84.99,0,254.97,Marketplace,South
+SALE-000349,2024-03-06,CUST-00131,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,0,44.99,In-Store,South
+SALE-000350,2024-06-26,CUST-00123,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,0,109.99,In-Store,Northeast
+SALE-000351,2024-09-22,CUST-00045,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,5,54.99,0,274.95,In-Store,Northeast
+SALE-000352,2024-02-21,CUST-00004,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,0,64.99,In-Store,Midwest
+SALE-000353,2024-05-01,CUST-00067,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,0,49.99,Marketplace,South
+SALE-000354,2024-08-05,CUST-00088,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,0,89.99,In-Store,Midwest
+SALE-000355,2024-05-23,CUST-00096,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,3,89.99,0,269.97,In-Store,Midwest
+SALE-000356,2024-05-18,CUST-00148,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,3,149.99,15,382.47,In-Store,West
+SALE-000357,2024-03-17,CUST-00220,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Online,Northeast
+SALE-000358,2024-09-21,CUST-00108,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,0,84.99,Online,Midwest
+SALE-000359,2024-01-25,CUST-00125,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,0,59.99,In-Store,South
+SALE-000360,2024-08-31,CUST-00016,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,3,64.99,15,165.72,Online,Midwest
+SALE-000361,2024-07-03,CUST-00191,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,Marketplace,Northeast
+SALE-000362,2024-03-03,CUST-00066,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,0,89.99,In-Store,West
+SALE-000363,2024-03-30,CUST-00156,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,2,64.99,25,97.48,Online,West
+SALE-000364,2024-08-16,CUST-00084,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,20,31.99,Online,Northeast
+SALE-000365,2024-03-15,CUST-00074,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,2,54.99,15,93.48,In-Store,Midwest
+SALE-000366,2024-07-26,CUST-00087,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,2,74.99,15,127.48,Online,Midwest
+SALE-000367,2024-06-11,CUST-00042,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,10,22.49,In-Store,West
+SALE-000368,2024-08-15,CUST-00155,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,15,80.74,Marketplace,South
+SALE-000369,2024-07-30,CUST-00192,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,5,39.99,0,199.95,Marketplace,South
+SALE-000370,2024-02-10,CUST-00033,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,2,149.99,0,299.98,Online,South
+SALE-000371,2024-08-30,CUST-00025,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,4,229.99,0,919.96,Online,Midwest
+SALE-000372,2024-02-12,CUST-00102,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,2,39.99,0,79.98,In-Store,West
+SALE-000373,2024-05-06,CUST-00022,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,10,85.49,Online,West
+SALE-000374,2024-03-28,CUST-00033,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,0,59.99,In-Store,South
+SALE-000375,2024-05-19,CUST-00084,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,0,84.99,Online,Northeast
+SALE-000376,2024-08-21,CUST-00179,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,10,98.99,In-Store,Midwest
+SALE-000377,2024-09-30,CUST-00145,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,1,74.99,0,74.99,Online,West
+SALE-000378,2024-08-14,CUST-00139,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,3,149.99,0,449.97,Online,Midwest
+SALE-000379,2024-09-24,CUST-00040,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,15,50.99,In-Store,West
+SALE-000380,2024-01-05,CUST-00089,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,10,53.99,In-Store,Midwest
+SALE-000381,2024-08-08,CUST-00194,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,15,72.24,In-Store,West
+SALE-000382,2024-04-06,CUST-00204,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,In-Store,West
+SALE-000383,2024-07-18,CUST-00102,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,15,127.49,Online,West
+SALE-000384,2024-09-21,CUST-00021,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,2,74.99,15,127.48,Marketplace,South
+SALE-000385,2024-09-29,CUST-00207,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,15,38.24,Online,West
+SALE-000386,2024-05-28,CUST-00219,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,1,229.99,0,229.99,In-Store,West
+SALE-000387,2024-09-08,CUST-00116,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,2,44.99,0,89.98,Online,West
+SALE-000388,2024-02-22,CUST-00013,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,0,109.99,Online,Northeast
+SALE-000389,2024-03-18,CUST-00113,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,Online,South
+SALE-000390,2024-09-12,CUST-00108,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,2,59.99,25,89.98,In-Store,Midwest
+SALE-000391,2024-03-15,CUST-00203,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,0,39.99,In-Store,South
+SALE-000392,2024-04-08,CUST-00019,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,20,87.99,Online,Northeast
+SALE-000393,2024-05-07,CUST-00098,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,Marketplace,South
+SALE-000394,2024-02-18,CUST-00064,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,0,39.99,Marketplace,South
+SALE-000395,2024-06-08,CUST-00122,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,2,94.99,20,151.98,Online,Northeast
+SALE-000396,2024-09-23,CUST-00187,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,2,39.99,0,79.98,In-Store,Northeast
+SALE-000397,2024-01-27,CUST-00077,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,15,55.24,Online,South
+SALE-000398,2024-06-15,CUST-00029,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,2,149.99,0,299.98,In-Store,Midwest
+SALE-000399,2024-05-04,CUST-00150,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,Online,Northeast
+SALE-000400,2024-03-20,CUST-00201,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,2,84.99,0,169.98,Online,Midwest
+SALE-000401,2024-06-22,CUST-00041,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,20,67.99,Marketplace,Northeast
+SALE-000402,2024-03-19,CUST-00161,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,10,35.99,In-Store,Northeast
+SALE-000403,2024-06-26,CUST-00033,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,1,84.99,15,72.24,Online,South
+SALE-000404,2024-07-02,CUST-00050,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,2,79.99,10,143.98,Online,West
+SALE-000405,2024-05-30,CUST-00011,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,2,84.99,0,169.98,In-Store,Midwest
+SALE-000406,2024-06-14,CUST-00146,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,10,44.99,Online,Midwest
+SALE-000407,2024-09-28,CUST-00213,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,0,109.99,Online,Northeast
+SALE-000408,2024-01-01,CUST-00068,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,15,93.49,In-Store,Midwest
+SALE-000409,2024-07-05,CUST-00188,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,3,49.99,15,127.47,Online,West
+SALE-000410,2024-07-17,CUST-00185,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,2,229.99,0,459.98,In-Store,South
+SALE-000411,2024-05-24,CUST-00197,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,0,109.99,In-Store,South
+SALE-000412,2024-02-04,CUST-00029,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,Marketplace,Midwest
+SALE-000413,2024-09-05,CUST-00046,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,1,39.99,0,39.99,Online,South
+SALE-000414,2024-09-26,CUST-00165,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,2,94.99,10,170.98,In-Store,West
+SALE-000415,2024-02-06,CUST-00013,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,0,89.99,Marketplace,Northeast
+SALE-000416,2024-02-10,CUST-00168,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,4,84.99,0,339.96,In-Store,West
+SALE-000417,2024-07-31,CUST-00093,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,2,109.99,15,186.98,In-Store,Midwest
+SALE-000418,2024-02-06,CUST-00015,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,15,38.24,Online,South
+SALE-000419,2024-04-28,CUST-00056,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,0,39.99,Online,West
+SALE-000420,2024-04-01,CUST-00135,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,2,149.99,0,299.98,In-Store,West
+SALE-000421,2024-07-02,CUST-00192,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,2,34.99,10,62.98,In-Store,South
+SALE-000422,2024-04-02,CUST-00110,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,In-Store,South
+SALE-000423,2024-08-14,CUST-00169,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,20,39.99,Marketplace,West
+SALE-000424,2024-07-30,CUST-00141,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,3,24.99,15,63.72,Online,Midwest
+SALE-000425,2024-04-19,CUST-00186,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,2,24.99,0,49.98,In-Store,West
+SALE-000426,2024-08-19,CUST-00191,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,0,44.99,Online,Northeast
+SALE-000427,2024-01-09,CUST-00186,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,5,39.99,0,199.95,Marketplace,West
+SALE-000428,2024-04-23,CUST-00078,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,1,79.99,0,79.99,Online,South
+SALE-000429,2024-09-18,CUST-00198,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,4,44.99,0,179.96,Marketplace,South
+SALE-000430,2024-07-01,CUST-00040,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,1,34.99,0,34.99,Online,West
+SALE-000431,2024-06-02,CUST-00150,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,Online,Northeast
+SALE-000432,2024-09-04,CUST-00056,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,2,229.99,0,459.98,In-Store,West
+SALE-000433,2024-06-02,CUST-00177,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,2,34.99,0,69.98,In-Store,Northeast
+SALE-000434,2024-06-20,CUST-00098,PROD-0003,"PixelClear 27"" Monitor",Electronics & Accessories,2,229.99,0,459.98,In-Store,South
+SALE-000435,2024-04-26,CUST-00107,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,3,34.99,10,94.47,In-Store,Midwest
+SALE-000436,2024-09-25,CUST-00003,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,In-Store,South
+SALE-000437,2024-04-23,CUST-00039,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,In-Store,Northeast
+SALE-000438,2024-09-15,CUST-00101,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,2,54.99,0,109.98,Online,Northeast
+SALE-000439,2024-06-21,CUST-00202,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,In-Store,Northeast
+SALE-000440,2024-02-13,CUST-00013,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,0,109.99,Online,Northeast
+SALE-000441,2024-09-03,CUST-00179,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,2,59.99,0,119.98,In-Store,Midwest
+SALE-000442,2024-09-25,CUST-00167,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,2,64.99,0,129.98,Online,Northeast
+SALE-000443,2024-02-15,CUST-00199,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,1,74.99,0,74.99,Online,Midwest
+SALE-000444,2024-06-25,CUST-00094,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,1,89.99,0,89.99,Online,Northeast
+SALE-000445,2024-08-14,CUST-00079,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,5,49.99,10,224.96,Online,West
+SALE-000446,2024-07-10,CUST-00210,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,In-Store,West
+SALE-000447,2024-05-04,CUST-00022,PROD-0004,HomeHub Smart Plug 4-Pack,Electronics & Accessories,2,34.99,20,55.98,Marketplace,West
+SALE-000448,2024-02-26,CUST-00214,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,0,59.99,In-Store,West
+SALE-000449,2024-04-18,CUST-00085,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,2,64.99,0,129.98,In-Store,West
+SALE-000450,2024-03-13,CUST-00067,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,10,98.99,In-Store,South
+SALE-000451,2024-03-28,CUST-00097,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,1,39.99,0,39.99,Online,Northeast
+SALE-000452,2024-01-05,CUST-00179,PROD-0009,BrewMaster Drip Coffee Maker,Home & Kitchen,1,44.99,0,44.99,In-Store,Midwest
+SALE-000453,2024-01-10,CUST-00170,PROD-0012,CrispAir Countertop Fryer,Home & Kitchen,3,89.99,0,269.97,Marketplace,West
+SALE-000454,2024-09-17,CUST-00099,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,5,149.99,25,562.46,Online,Midwest
+SALE-000455,2024-09-29,CUST-00081,PROD-0016,TrailBlazer Rain Shell,Apparel & Footwear,3,84.99,0,254.97,Online,South
+SALE-000456,2024-01-12,CUST-00118,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,4,109.99,0,439.96,Marketplace,Northeast
+SALE-000457,2024-03-21,CUST-00079,PROD-0011,GrindWell Manual Coffee Grinder,Home & Kitchen,1,24.99,0,24.99,In-Store,West
+SALE-000458,2024-09-13,CUST-00091,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,0,59.99,Online,Midwest
+SALE-000459,2024-01-16,CUST-00066,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,3,94.99,20,227.98,Marketplace,West
+SALE-000460,2024-07-20,CUST-00058,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,10,53.99,Online,Midwest
+SALE-000461,2024-04-26,CUST-00098,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,5,39.99,0,199.95,In-Store,South
+SALE-000462,2024-06-17,CUST-00110,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,4,59.99,0,239.96,Online,South
+SALE-000463,2024-04-13,CUST-00168,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,2,59.99,15,101.98,Online,West
+SALE-000464,2024-08-08,CUST-00181,PROD-0017,FlexFit Performance Leggings,Apparel & Footwear,4,39.99,25,119.97,Marketplace,Northeast
+SALE-000465,2024-09-29,CUST-00038,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,20,39.99,Online,Midwest
+SALE-000466,2024-06-12,CUST-00082,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,2,59.99,20,95.98,Online,South
+SALE-000467,2024-05-20,CUST-00106,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,0,59.99,Online,South
+SALE-000468,2024-05-16,CUST-00034,PROD-0006,SoundWave Bluetooth Speaker,Electronics & Accessories,1,49.99,10,44.99,In-Store,Northeast
+SALE-000469,2024-01-14,CUST-00153,PROD-0008,CopperCraft 10-Piece Cookware Set,Home & Kitchen,1,149.99,0,149.99,In-Store,Northeast
+SALE-000470,2024-08-28,CUST-00123,PROD-0005,StrideFit Fitness Tracker,Electronics & Accessories,1,59.99,10,53.99,Online,Northeast
+SALE-000471,2024-03-11,CUST-00219,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,1,94.99,0,94.99,Online,West
+SALE-000472,2024-07-30,CUST-00105,PROD-0001,AuraSound WB-200 Wireless Earbuds,Electronics & Accessories,4,79.99,0,319.96,In-Store,Midwest
+SALE-000473,2024-08-12,CUST-00052,PROD-0007,HearthGlow 6-Quart Slow Cooker,Home & Kitchen,1,64.99,15,55.24,In-Store,Northeast
+SALE-000474,2024-08-06,CUST-00084,PROD-0015,CozyKnit Wool Sweater,Apparel & Footwear,3,54.99,0,164.97,Online,Northeast
+SALE-000475,2024-07-20,CUST-00189,PROD-0013,StrideLine Trail Running Shoe,Apparel & Footwear,2,94.99,10,170.98,In-Store,South
+SALE-000476,2024-01-20,CUST-00153,PROD-0018,SummitPeak Hiking Boots,Apparel & Footwear,1,109.99,0,109.99,In-Store,Northeast
+SALE-000477,2024-05-05,CUST-00212,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,3,39.99,0,119.97,Online,West
+SALE-000478,2024-09-21,CUST-00189,PROD-0002,VoltEdge 65W GaN Charger,Electronics & Accessories,2,39.99,15,67.98,Marketplace,South
+SALE-000479,2024-06-04,CUST-00049,PROD-0010,LinenLoft Bedding Bundle,Home & Kitchen,1,59.99,15,50.99,Online,South
+SALE-000480,2024-01-28,CUST-00043,PROD-0014,UrbanFlex Denim Jacket,Apparel & Footwear,1,74.99,10,67.49,Marketplace,Northeast
