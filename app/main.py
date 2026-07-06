@@ -1,28 +1,26 @@
 """
 app/main.py
 
-Phase 1 FastAPI app: a single /ask endpoint that retrieves relevant
-chunks from the FAISS index and generates a grounded, cited answer.
+Phase 2 FastAPI app: /ask now routes each question to SQL, document
+retrieval, or both, then synthesizes a final grounded answer.
 
 Run with:
     uvicorn app.main:app --reload
 """
 
-import os
 from pathlib import Path
 
-from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from rag.retriever import retrieve, format_context
+from tools.sql_tool import answer_from_sql
+from app.router import route_question
+from app.llm import call_llm
 
-load_dotenv()
+app = FastAPI(title="Enterprise Agentic RAG - Phase 2")
 
-app = FastAPI(title="Enterprise Agentic RAG - Phase 1")
-
-PROMPT_TEMPLATE_PATH = Path("prompts/rag.txt")
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "gemini")
+FINAL_PROMPT_PATH = Path("prompts/rag.txt")
 
 
 class AskRequest(BaseModel):
@@ -37,40 +35,15 @@ class Source(BaseModel):
 
 class AskResponse(BaseModel):
     answer: str
+    route: str
     sources: list[Source]
+    sql_used: str | None = None
 
 
 def load_prompt_template() -> str:
-    if not PROMPT_TEMPLATE_PATH.exists():
-        raise FileNotFoundError(f"Prompt template not found: {PROMPT_TEMPLATE_PATH}")
-    return PROMPT_TEMPLATE_PATH.read_text()
-
-
-def call_llm(prompt: str) -> str:
-    """Thin dispatcher so swapping LLM providers only touches this function.
-
-    Uses LangChain chat model wrappers (not raw provider SDKs) deliberately:
-    Phase 3 wraps this logic into LangGraph nodes, which expect the standard
-    LangChain .invoke() interface, tool-binding, and structured output support.
-    Building on that interface now avoids a rewrite later.
-    """
-    if LLM_PROVIDER == "gemini":
-        from langchain_google_genai import ChatGoogleGenerativeAI
-
-        api_key = os.getenv("GOOGLE_API_KEY")
-        if not api_key:
-            raise EnvironmentError("GOOGLE_API_KEY not set in .env")
-
-        model = ChatGoogleGenerativeAI(
-            model="gemini-3.5-flash",
-            google_api_key=api_key,
-        )
-        response = model.invoke(prompt)
-        return response.text
-
-
-    else:
-        raise ValueError(f"Unknown LLM_PROVIDER: {LLM_PROVIDER}")
+    if not FINAL_PROMPT_PATH.exists():
+        raise FileNotFoundError(f"Prompt template not found: {FINAL_PROMPT_PATH}")
+    return FINAL_PROMPT_PATH.read_text()
 
 
 @app.get("/health")
@@ -83,25 +56,45 @@ def ask(request: AskRequest):
     if not request.question.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty.")
 
-    chunks = retrieve(request.question, k=request.k)
-    if not chunks:
-        return AskResponse(
-            answer="I don't have enough information in the provided documents to answer that.",
-            sources=[],
+    route = route_question(request.question)
+
+    context_parts = []
+    sources = []
+    sql_used = None
+
+    if route in ("sql", "both"):
+        sql_result = answer_from_sql(request.question)
+        sql_used = sql_result["sql"]
+        context_parts.append(
+            f"[Structured database results]\n"
+            f"SQL query used: {sql_result['sql']}\n"
+            f"Results:\n{sql_result['result_text']}"
         )
 
-    context = format_context(chunks)
+    if route in ("retrieval", "both"):
+        chunks = retrieve(request.question, k=request.k)
+        if chunks:
+            context_parts.append(f"[Document excerpts]\n{format_context(chunks)}")
+            sources = [
+                Source(file=c.metadata.get("source", "unknown"), page=c.metadata.get("page", "?"))
+                for c in chunks
+            ]
+
+    if not context_parts:
+        return AskResponse(
+            answer="I don't have enough information to answer that.",
+            route=route,
+            sources=[],
+            sql_used=sql_used,
+        )
+
+    combined_context = "\n\n".join(context_parts)
     template = load_prompt_template()
-    prompt = template.format(context=context, question=request.question)
+    prompt = template.format(context=combined_context, question=request.question)
 
     answer = call_llm(prompt)
 
-    sources = [
-        Source(file=chunk.metadata.get("source", "unknown"), page=chunk.metadata.get("page", "?"))
-        for chunk in chunks
-    ]
-
-    return AskResponse(answer=answer, sources=sources)
+    return AskResponse(answer=answer, route=route, sources=sources, sql_used=sql_used)
 
 
 if __name__ == "__main__":
