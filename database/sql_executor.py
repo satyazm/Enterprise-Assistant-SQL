@@ -23,10 +23,11 @@ MAX_ROWS = 100
 
 
 def is_safe_sql(sql: str) -> bool:
-    """Reject anything that isn't a plain SELECT, or that contains forbidden keywords."""
+    """Reject anything that isn't a plain SELECT or a read-only CTE (WITH ... SELECT),
+    or that contains forbidden keywords."""
     normalized = sql.strip().lower()
 
-    if not normalized.startswith("select"):
+    if not (normalized.startswith("select") or normalized.startswith("with")):
         return False
 
     for keyword in FORBIDDEN_KEYWORDS:

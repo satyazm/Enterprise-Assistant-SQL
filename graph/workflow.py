@@ -62,8 +62,3 @@ def build_graph():
 graph = build_graph()
 
 
-if __name__ == "__main__":
-    # Quick manual smoke test: python -m graph.workflow
-    result = graph.invoke({"question": "Which region had the highest total sales revenue?", "k": 4})
-    print("Execution path:", result["execution_path"])
-    print("Answer:", result["final_answer"])
