@@ -1,59 +1,227 @@
-# Enterprise Agentic RAG — Phase 1
+# Enterprise Agentic RAG
 
-A grounded, cited question-answering API over enterprise-style PDFs (policies, complaint reports, etc.).
-This is Phase 1 of a larger multi-agent project — see project plan for Phases 2–4 (SQL agent,
-LangGraph multi-agent workflow, evaluation + deployment).
+An enterprise question-answering system that can use:
 
-## Locked tech decisions (Week 0)
+- **Document retrieval** over PDFs in `data/pdfs/`
+- **Read-only SQL** over a Postgres database
+- **LangGraph orchestration** to route, merge, and answer
+- **FastAPI** for the backend API
+- **Streamlit** for the chat UI
 
-- **LLM**: Gemini (`gemini-1.5-flash`) — swap via `LLM_PROVIDER` in `.env`
-- **Embeddings**: Gemini `text-embedding-004` — swap via `EMBEDDING_PROVIDER` in `.env`
-- **Vector DB**: FAISS (local, in-process) — will move to Pinecone in Phase 4
-- **Backend**: FastAPI
+The repo contains the current graph-based implementation plus some earlier phase files kept for reference.
+
+## What it does
+
+Given a question, the app can:
+
+1. Decide whether the answer needs SQL, documents, or both.
+2. Retrieve relevant PDF chunks from a cached FAISS index.
+3. Generate and execute a read-only SQL query against Postgres.
+4. Merge the results into one grounded answer with citations.
+
+## Architecture
+
+Current request flow:
+
+`Streamlit UI -> FastAPI /ask -> LangGraph planner -> SQL and/or retrieval -> reasoning -> final answer`
+
+### Main components
+
+- `app/main.py` - FastAPI app for the current LangGraph workflow
+- `graph/` - LangGraph state, nodes, and workflow wiring
+- `tools/sql_tool.py` - LLM-to-SQL generation plus safe execution
+- `rag/` - PDF loading, chunking, embedding, indexing, and retrieval
+- `database/` - Postgres schema, loader, and SQL execution helpers
+- `streamlit.py` - chat UI that calls the API
+
+## Repository layout
+
+```text
+app/
+  main.py          FastAPI API for the current graph-based system
+  main1.py         Earlier phase 1 FastAPI app kept for reference
+  llm.py           Shared LLM provider wrapper
+  router.py        Question router for sql / retrieval / both
+
+graph/
+  state.py         Shared LangGraph state schema
+  nodes.py         Planner, SQL, retrieval, reasoning, and report nodes
+  workflow.py      Compiles the LangGraph workflow
+
+rag/
+  chunking.py      PDF loading and text splitting
+  embeddings.py    Embedding provider wrapper
+  vectorstore.py   FAISS build/load/persist helpers
+  retriever.py     Top-k retrieval and context formatting
+
+tools/
+  sql_tool.py      Generates SQL, runs it safely, formats results
+
+database/
+  sample_db.sql    Postgres schema and indexes
+  load_data.py     Loads CSVs into the database
+  postgres.py      DB connection and schema description
+  sql_executor.py  Safety checks and SQL execution helpers
+
+prompts/
+  rag.txt          Final grounded-answer prompt
+  router.txt       Planner prompt
+  sql.txt          SQL-generation prompt
+
+data/
+  pdfs/            Source PDFs
+  csv/             Structured sample data
+  faiss_index/     Generated FAISS cache
+
+tests/
+  test_retrieval.py
+
+streamlit.py       Streamlit chat frontend
+requirements.txt
+README.md
+```
+
+## Data sources
+
+### Documents
+
+Put text-based PDFs in `data/pdfs/`.
+
+Included examples:
+
+- `01_hr_policy.pdf`
+- `02_refund_policy.pdf`
+- `03_complaints_electronics_q1.pdf`
+- `04_complaints_home_kitchen_q2.pdf`
+- `05_complaints_apparel_q3.pdf`
+- `06_sales_summary_q2.pdf`
+- `07_marketing_summary_q3.pdf`
+
+### Structured data
+
+The database schema expects these CSV files in `data/csv/`:
+
+- `customers.csv`
+- `products.csv`
+- `sample_sales.csv`
+- `complaints.csv`
 
 ## Setup
 
+### 1) Create a virtual environment
+
 ```bash
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
-
-cp .env.example .env            # then fill in your API key
 ```
 
-Add a few PDFs to `data/pdfs/` (policies, reports, anything text-based).
+### 2) Create `.env`
 
-## Run
+Copy `.env.example` and fill in the values:
+
+Required variables:
+
+```bash
+GOOGLE_API_KEY=your_key
+LLM_PROVIDER=gemini
+EMBEDDING_PROVIDER=gemini
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=enterprise_rag
+
+DB_USER=raguser
+DB_PASSWORD=ragpass
+
+DB_READONLY_USER=readonly_user
+DB_READONLY_PASSWORD=readonly_password
+
+CSV_DIR=data/csv
+```
+
+Optional:
+
+```bash
+OPENAI_API_KEY=...
+```
+
+`LLM_PROVIDER` and `EMBEDDING_PROVIDER` currently default to Gemini. The code supports OpenAI for the LLM wrapper, but Gemini is the primary path in this repo.
+
+## Database setup
+
+1. Create the schema:
+
+```bash
+psql -U raguser -d enterprise_rag -f database/sample_db.sql
+```
+
+2. Load the CSV data:
+
+```bash
+python -m database.load_data
+```
+
+3. Make sure the read-only DB user in `.env` has `SELECT` access.
+
+## Running the backend
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Then either open the interactive docs at `http://localhost:8000/docs`, or:
+Health check:
+
+```bash
+curl http://localhost:8000/health
+```
+
+Ask endpoint:
 
 ```bash
 curl -X POST http://localhost:8000/ask \
   -H "Content-Type: application/json" \
-  -d '{"question": "What is the refund policy?", "k": 4}'
+  -d '{"question":"What is the refund policy?","k":4}'
 ```
 
-Response:
+Example response:
 
 ```json
 {
-  "answer": "...grounded answer with [1] style citations...",
+  "answer": "...",
+  "route": "retrieval",
   "sources": [
     {"file": "refund_policy.pdf", "page": 1}
-  ]
+  ],
+  "sql_used": null,
+  "execution_path": ["planner", "retrieval", "reasoning", "report"]
 }
 ```
 
-## First run notes
+## Running the Streamlit UI
 
-- The first call builds the FAISS index from `data/pdfs/` and saves it to `data/faiss_index/`
-  (this can take a minute depending on how many PDFs you have). Subsequent runs load the
-  cached index instantly.
-- Delete `data/faiss_index/` and restart if you add/change PDFs, to force a rebuild.
+```bash
+streamlit run streamlit.py
+```
+
+The UI expects the API server to already be running at `http://localhost:8000/ask`.
+
+## How retrieval works
+
+- PDFs are loaded with `PyPDFLoader`
+- Pages are chunked with overlap
+- Chunks are embedded with Gemini embeddings
+- A local FAISS index is created in `data/faiss_index/`
+- The index is reused on later runs unless you delete the cache
+
+If you change PDFs, remove `data/faiss_index/` and restart to rebuild the index.
+
+## How SQL works
+
+- A router classifies the question as `sql`, `retrieval`, or `both`
+- `tools/sql_tool.py` asks the LLM for a single read-only `SELECT`
+- `database/sql_executor.py` blocks unsafe SQL and enforces a row limit
+- `database/postgres.py` connects using the read-only DB user
 
 ## Tests
 
@@ -61,22 +229,14 @@ Response:
 pytest tests/
 ```
 
-(Requires PDFs in `data/pdfs/` and a valid API key, since tests hit the real embedding provider.)
+The retrieval tests need:
 
-## Project structure
+- PDFs in `data/pdfs/`
+- a valid API key
+- the embedding provider configured
 
-```
-app/main.py          - FastAPI app, /ask endpoint
-rag/chunking.py       - PDF loading + text splitting
-rag/embeddings.py     - embedding provider wrapper
-rag/vectorstore.py    - FAISS index build/load/persist
-rag/retriever.py      - top-k retrieval + context formatting
-prompts/rag.txt       - grounded-answer prompt template
-tests/                - sanity tests
-```
+## Notes
 
-## Next phases
-
-- **Phase 2**: add a Postgres-backed SQL agent + router (SQL vs. document questions)
-- **Phase 3**: convert router into a LangGraph multi-agent workflow (planner, SQL, retrieval, reasoning, report)
-- **Phase 4**: RAGAS/DeepEval evaluation, observability, Docker, deployment
+- `app/main1.py` is the older phase 1-only backend.
+- `data/faiss_index/` is generated, not source data.
+- The app is intentionally read-only for SQL execution.
