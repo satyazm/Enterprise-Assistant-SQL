@@ -3,6 +3,11 @@ tools/sql_tool.py
 
 Takes a natural language question, generates a read-only SQL query
 against the known schema, executes it safely, and returns readable results.
+
+Before generation, runs a value-linking lookup (database/schema_values.py)
+to ground the model in the ACTUAL values living in categorical columns
+right now, instead of relying on the model to guess or on hardcoded
+prompt text that would go stale as the data changes.
 """
 
 from pathlib import Path
@@ -10,6 +15,7 @@ from pathlib import Path
 from app.llm import call_llm
 from database.postgres import SCHEMA_DESCRIPTION
 from database.sql_executor import execute_sql, format_sql_results
+from database.schema_values import find_relevant_values, format_value_hints
 
 SQL_PROMPT_PATH = Path("prompts/sql.txt")
 
@@ -33,7 +39,8 @@ def _clean_generated_sql(raw: str) -> str:
 
 def answer_from_sql(question: str) -> dict:
     """
-    Full SQL agent pipeline: question -> generated SQL -> executed -> formatted text.
+    Full SQL agent pipeline: question -> value-linking hints -> generated SQL
+    -> executed -> formatted text.
 
     Returns:
         {
@@ -43,7 +50,11 @@ def answer_from_sql(question: str) -> dict:
         }
     """
     template = _load_sql_prompt_template()
-    prompt = template.format(schema=SCHEMA_DESCRIPTION, question=question)
+
+    value_matches = find_relevant_values(question)
+    value_hints = format_value_hints(value_matches)
+
+    prompt = template.format(schema=SCHEMA_DESCRIPTION, value_hints=value_hints, question=question)
 
     generated = call_llm(prompt)
     sql = _clean_generated_sql(generated)
@@ -67,6 +78,6 @@ def answer_from_sql(question: str) -> dict:
 
 if __name__ == "__main__":
     # Quick manual smoke test: python -m tools.sql_tool
-    out = answer_from_sql("Which region had the highest total sales revenue?")
+    out = answer_from_sql("Which product had the highest revenue in the Home & Kitchen category?")
     print("Generated SQL:", out["sql"])
     print("Result:\n", out["result_text"])

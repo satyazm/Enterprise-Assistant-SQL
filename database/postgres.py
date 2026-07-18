@@ -51,6 +51,11 @@ Table: products
   product_id (VARCHAR, PK), product_name, product_line, category,
   unit_price (NUMERIC), unit_cost (NUMERIC), margin_pct (NUMERIC)
 
+  Note: product_line is a broad grouping (e.g. "Home & Kitchen"); category is a
+  more specific subcategory within it (e.g. "Cookware"). If the question's exact
+  wording appears in the "Detected value matches" hints below, use those exact
+  values -- they're pulled live from the database and are more reliable than guessing.
+
 Table: sales
   sale_id (VARCHAR, PK), sale_date (DATE), customer_id (VARCHAR, FK -> customers),
   product_id (VARCHAR, FK -> products), product_name, product_line,

@@ -30,6 +30,7 @@ Current request flow:
 - `app/main.py` - FastAPI app for the current LangGraph workflow
 - `graph/` - LangGraph state, nodes, and workflow wiring
 - `tools/sql_tool.py` - LLM-to-SQL generation plus safe execution
+- `database/schema_values.py` - semantic value-linking for SQL grounding
 - `rag/` - PDF loading, chunking, embedding, indexing, and retrieval
 - `database/` - Postgres schema, loader, and SQL execution helpers
 - `streamlit.py` - chat UI that calls the API
@@ -61,6 +62,7 @@ database/
   sample_db.sql    Postgres schema and indexes
   load_data.py     Loads CSVs into the database
   postgres.py      DB connection and schema description
+  schema_values.py Live categorical-value index + semantic matching hints
   sql_executor.py  Safety checks and SQL execution helpers
 
 prompts/
@@ -219,9 +221,54 @@ If you change PDFs, remove `data/faiss_index/` and restart to rebuild the index.
 ## How SQL works
 
 - A router classifies the question as `sql`, `retrieval`, or `both`
-- `tools/sql_tool.py` asks the LLM for a single read-only `SELECT`
+- `database/schema_values.py` fetches distinct live values from key categorical columns
+  (like `products.product_line`, `products.category`, `customers.region`, etc.)
+- The SQL agent embeds the user question, semantically matches likely value mentions,
+  and injects those matches as `value_hints` into `prompts/sql.txt`
+- `tools/sql_tool.py` asks the LLM for a single read-only `SELECT` grounded by those hints
 - `database/sql_executor.py` blocks unsafe SQL and enforces a row limit
 - `database/postgres.py` connects using the read-only DB user
+
+This avoids brittle hardcoded value lists and helps prevent column/value mismatches like
+using `"Home & Kitchen"` as `category` when it belongs to `product_line` in the current data.
+
+### SQL value-linking smoke test
+
+You can run the value-linking module directly:
+
+```bash
+python -m database.schema_values
+```
+
+It will:
+
+- build an in-memory index from live DB distinct values
+- run sample semantic matches
+- print hint candidates used by SQL generation
+
+### Common SQL mismatch troubleshooting
+
+If a SQL question returns no rows unexpectedly, first verify whether the filter value belongs to
+the correct column.
+
+Example:
+
+- Question: `Which product had the highest total revenue in the Home & Kitchen category, and how many units were sold?`
+- Common failure: model uses `WHERE p.category = 'Home & Kitchen'`
+- In this dataset, `Home & Kitchen` is a `product_line` value, not a `category` value
+
+Expected behavior with value-linking enabled:
+
+- semantic matching surfaces `products.product_line = 'Home & Kitchen'`
+- SQL generation uses that hint in the `WHERE` clause
+- query returns real rows (if matching data exists)
+
+Quick checks:
+
+1. Run `python -m database.schema_values` and confirm the hint contains
+   `products.product_line = 'Home & Kitchen'`
+2. Ensure the API is restarted after code/prompt changes
+3. Re-run the same question and inspect the generated SQL in Streamlit
 
 ## Tests
 
