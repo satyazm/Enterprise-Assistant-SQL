@@ -20,7 +20,7 @@ def load_pdfs(pdf_dir: str) -> List[Document]:
     if not os.path.isdir(pdf_dir):
         raise FileNotFoundError(f"PDF directory not found: {pdf_dir}")
 
-    pdf_files = [f for f in os.listdir(pdf_dir) if f.lower().endswith(".pdf")]
+    pdf_files = sorted(f for f in os.listdir(pdf_dir) if f.lower().endswith(".pdf"))
     if not pdf_files:
         raise ValueError(f"No PDF files found in {pdf_dir}")
 

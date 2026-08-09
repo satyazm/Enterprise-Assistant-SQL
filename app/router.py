@@ -19,12 +19,16 @@ def _load_router_prompt_template() -> str:
     return ROUTER_PROMPT_PATH.read_text()
 
 
-def route_question(question: str) -> str:
+def route_question(question: str, history: str = "(no earlier turns in this conversation)") -> str:
     """Returns one of: 'sql', 'retrieval', 'both'. Defaults to 'both' if the
     LLM's output is unparseable, since that's the safest fallback (better to
-    over-fetch than to miss relevant context)."""
+    over-fetch than to miss relevant context).
+
+    `history` lets a follow-up like "what about last quarter?" route
+    correctly even though it has no source/topic keywords of its own —
+    without it, the classifier only ever sees the bare follow-up text."""
     template = _load_router_prompt_template()
-    prompt = template.format(question=question)
+    prompt = template.format(question=question, history=history)
 
     raw = call_llm(prompt).strip().lower()
 

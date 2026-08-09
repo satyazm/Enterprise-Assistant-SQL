@@ -19,24 +19,28 @@ DB_NAME = os.getenv("DB_NAME", "enterprise_rag")
 DB_READONLY_USER = os.getenv("DB_READONLY_USER")
 DB_READONLY_PASSWORD = os.getenv("DB_READONLY_PASSWORD")
 
-if not DB_READONLY_USER or not DB_READONLY_PASSWORD:
-    raise EnvironmentError(
-        "DB_READONLY_USER / DB_READONLY_PASSWORD not set in .env. "
-        "Create the read-only DB user first (see database/sample_db.sql setup steps)."
-    )
-
-READONLY_DB_URL = (
-    f"postgresql://{DB_READONLY_USER}:{DB_READONLY_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-)
-
 _engine = None
 
 
 def get_engine():
-    """Returns a singleton SQLAlchemy engine connected as the read-only user."""
+    """Returns a singleton SQLAlchemy engine connected as the read-only user.
+
+    Credentials are checked here rather than at import time so that
+    importing this module (which the SQL-only parts of the graph pull in
+    transitively) doesn't crash a deployment that only wants document
+    retrieval and never actually calls get_engine().
+    """
     global _engine
     if _engine is None:
-        _engine = create_engine(READONLY_DB_URL, pool_pre_ping=True)
+        if not DB_READONLY_USER or not DB_READONLY_PASSWORD:
+            raise EnvironmentError(
+                "DB_READONLY_USER / DB_READONLY_PASSWORD not set in .env. "
+                "Create the read-only DB user first (see database/sample_db.sql setup steps)."
+            )
+        readonly_db_url = (
+            f"postgresql://{DB_READONLY_USER}:{DB_READONLY_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+        )
+        _engine = create_engine(readonly_db_url, pool_pre_ping=True)
     return _engine
 
 

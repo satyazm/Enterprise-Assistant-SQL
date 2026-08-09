@@ -1,5 +1,5 @@
 """
-frontend/streamlit_app.py
+streamlit_app.py
 
 Continuous chat interface for the Enterprise Agentic Knowledge Platform.
 Calls the existing FastAPI /ask endpoint (no logic duplicated here) and
@@ -7,12 +7,14 @@ keeps a running conversation history for the session, with each turn's
 execution trace, generated SQL, and document sources shown inline.
 
 Run with:
-    streamlit run frontend/streamlit_app.py
+    streamlit run streamlit_app.py
 
 (Requires the FastAPI server to be running separately:
     uvicorn app.main:app --reload
 )
 """
+
+import uuid
 
 import requests
 import streamlit as st
@@ -36,6 +38,11 @@ st.caption("Ask a question — the system will route it through SQL, documents, 
 if "history" not in st.session_state:
     st.session_state.history = []  # list of dicts, one per turn
 
+# Ties this browser session to one LangGraph checkpointer thread, so the
+# agent actually remembers earlier turns (not just the UI displaying them).
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+
 with st.sidebar:
     st.header("About")
     st.markdown(
@@ -55,6 +62,10 @@ with st.sidebar:
     st.divider()
     if st.button("🗑️ Clear chat history"):
         st.session_state.history = []
+        # New thread_id too — otherwise the agent would still remember the
+        # "cleared" conversation via the server-side checkpointer even
+        # though the UI shows a blank slate.
+        st.session_state.session_id = str(uuid.uuid4())
         st.rerun()
 
 
@@ -97,7 +108,11 @@ if question:
     with st.chat_message("assistant"):
         with st.spinner("Routing through the agent workflow..."):
             try:
-                response = requests.post(API_URL, json={"question": question, "k": 4}, timeout=60)
+                response = requests.post(
+                    API_URL,
+                    json={"question": question, "k": 4, "session_id": st.session_state.session_id},
+                    timeout=60,
+                )
                 response.raise_for_status()
                 data = response.json()
             except requests.exceptions.ConnectionError:

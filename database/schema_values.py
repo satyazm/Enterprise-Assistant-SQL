@@ -18,7 +18,12 @@ the moment the data changes), this module:
 
 LOOKUP_COLUMNS below is structural metadata (which columns are worth
 indexing), not a hardcoded list of values -- the values themselves are
-always pulled live and will pick up new/changed data automatically.
+pulled live from the database, so no value list to maintain by hand.
+
+Note: the index is built once (lazily, on first use) and then cached
+in memory for the life of the process -- it does NOT auto-refresh if
+the underlying data changes later. Call build_value_index() again
+(e.g. after a data reload) to pick up new/changed values.
 """
 
 from dataclasses import dataclass

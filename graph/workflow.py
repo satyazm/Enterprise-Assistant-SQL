@@ -18,6 +18,7 @@ Compiled once at import time; app/main.py imports `graph` and calls .invoke().
 
 from typing import List
 
+from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import StateGraph, START, END
 
 from graph.state import GraphState
@@ -55,7 +56,17 @@ def build_graph():
     workflow.add_edge("reasoning_node", "report_node")
     workflow.add_edge("report_node", END)
 
-    return workflow.compile()
+    # MemorySaver is an in-process, in-memory checkpointer: state persists
+    # for the life of this Python process, keyed by thread_id, and is lost
+    # on restart. That's the right tradeoff for a single-instance app like
+    # this one — a durable store (Postgres/SQLite checkpointer) would be
+    # the next step if this ever ran as multiple replicas.
+    #
+    # Any invoke() against this compiled graph MUST pass
+    # config={"configurable": {"thread_id": "<session id>"}} — LangGraph
+    # raises if a checkpointer is set and no thread_id is given.
+    checkpointer = MemorySaver()
+    return workflow.compile(checkpointer=checkpointer)
 
 
 # Compiled once, reused across requests.

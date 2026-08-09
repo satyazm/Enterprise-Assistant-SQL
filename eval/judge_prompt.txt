@@ -1,0 +1,22 @@
+You are grading one turn of an enterprise Q&A system. Judge the ANSWER strictly against the
+CONTEXT that was actually given to the system when it generated that answer — not your own
+outside knowledge. If the context is empty or missing, the answer should have said it doesn't
+have enough information; treat any invented specifics as unfaithful.
+
+Question:
+{question}
+
+Context given to the system (SQL results and/or document excerpts):
+{context}
+
+System's answer:
+{answer}
+
+Score on two axes:
+- faithfulness (0-5): does every concrete claim in the answer trace back to the context above?
+  5 = fully grounded, 0 = mostly fabricated or unsupported by the context.
+- helpfulness (0-5): does the answer clearly and completely address the question using what's
+  in the context? 5 = excellent and complete, 0 = useless, off-topic, or non-responsive.
+
+Respond with ONLY valid JSON, no markdown fences, no commentary, in exactly this shape:
+{{"faithfulness": <int 0-5>, "helpfulness": <int 0-5>, "rationale": "<one sentence, specific>"}}

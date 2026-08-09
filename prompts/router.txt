@@ -9,6 +9,13 @@ Classify the question below into exactly ONE of these three labels:
 - retrieval  (needs only unstructured document content)
 - both       (needs information from both sources to be fully answered)
 
+The question may be a follow-up that only makes sense given the conversation
+so far (e.g. "what about last quarter?" or "and the West region?") — use the
+conversation to resolve what it's really asking, then classify that.
+
+Conversation so far (oldest first):
+{history}
+
 Respond with exactly one word: sql, retrieval, or both. No explanation.
 
 Question: {question}

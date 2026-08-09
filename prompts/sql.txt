@@ -8,12 +8,18 @@ Rules:
 - Use explicit JOINs with proper foreign key relationships when combining tables.
 - If "Detected value matches" are provided below, use those EXACT values in your
   WHERE clauses instead of guessing — they were matched against the live database.
+- The question may be a follow-up (e.g. "what about the West region instead?")
+  that only makes sense given the conversation so far — use it to write a
+  complete, standalone query for what's really being asked.
 - If the question cannot be answered with the given schema, output exactly: NO_QUERY
 
 Schema:
 {schema}
 
 {value_hints}
+
+Conversation so far (oldest first):
+{history}
 
 Question: {question}
 

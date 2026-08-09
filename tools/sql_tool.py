@@ -37,10 +37,14 @@ def _clean_generated_sql(raw: str) -> str:
     return cleaned.strip()
 
 
-def answer_from_sql(question: str) -> dict:
+def answer_from_sql(question: str, history: str = "(no earlier turns in this conversation)") -> dict:
     """
     Full SQL agent pipeline: question -> value-linking hints -> generated SQL
     -> executed -> formatted text.
+
+    `history` lets a follow-up like "what about the West region instead?"
+    generate a correct standalone SQL query even though the question alone
+    doesn't name what metric/table it's asking about.
 
     Returns:
         {
@@ -54,7 +58,7 @@ def answer_from_sql(question: str) -> dict:
     value_matches = find_relevant_values(question)
     value_hints = format_value_hints(value_matches)
 
-    prompt = template.format(schema=SCHEMA_DESCRIPTION, value_hints=value_hints, question=question)
+    prompt = template.format(schema=SCHEMA_DESCRIPTION, value_hints=value_hints, question=question, history=history)
 
     generated = call_llm(prompt)
     sql = _clean_generated_sql(generated)

@@ -2,11 +2,12 @@
 
 An enterprise question-answering system that can use:
 
-- **Document retrieval** over PDFs in `data/pdfs/`
-- **Read-only SQL** over a Postgres database
-- **LangGraph orchestration** to route, merge, and answer
+- **Document retrieval** over PDFs in `data/pdfs/`, via hybrid (vector + keyword) search with cross-encoder reranking
+- **Read-only SQL** over a Postgres database, grounded by live value-linking
+- **LangGraph orchestration** to route, merge, and answer — with multi-turn conversational memory
 - **FastAPI** for the backend API
 - **Streamlit** for the chat UI
+- **An evaluation harness** and a **SQL guardrail test suite** to back up "it works" and "it's safe" with actual numbers, not vibes
 
 The repo contains the current graph-based implementation plus some earlier phase files kept for reference.
 
@@ -14,10 +15,11 @@ The repo contains the current graph-based implementation plus some earlier phase
 
 Given a question, the app can:
 
-1. Decide whether the answer needs SQL, documents, or both.
-2. Retrieve relevant PDF chunks from a cached FAISS index.
+1. Decide whether the answer needs SQL, documents, or both — using the current question *and* the conversation so far, so follow-ups like "what about last quarter?" resolve correctly.
+2. Retrieve relevant PDF chunks via hybrid search (FAISS + BM25) narrowed down by a cross-encoder reranker.
 3. Generate and execute a read-only SQL query against Postgres.
 4. Merge the results into one grounded answer with citations.
+5. Remember the turn, so the next question in the same conversation can build on it.
 
 ## Architecture
 
@@ -25,15 +27,21 @@ Current request flow:
 
 `Streamlit UI -> FastAPI /ask -> LangGraph planner -> SQL and/or retrieval -> reasoning -> final answer`
 
+Every step reads and writes a shared `GraphState` (see `graph/state.py`), including a `chat_history` field
+that's persisted across requests by a LangGraph checkpointer keyed on a `session_id` — that's what gives
+the agent memory of earlier turns in the same conversation.
+
 ### Main components
 
 - `app/main.py` - FastAPI app for the current LangGraph workflow
-- `graph/` - LangGraph state, nodes, and workflow wiring
+- `graph/` - LangGraph state, nodes, workflow wiring, and the checkpointer that gives it multi-turn memory
 - `tools/sql_tool.py` - LLM-to-SQL generation plus safe execution
 - `database/schema_values.py` - semantic value-linking for SQL grounding
-- `rag/` - PDF loading, chunking, embedding, indexing, and retrieval
+- `database/sql_executor.py` - the SQL safety layer, covered by `tests/test_sql_guardrails.py`
+- `rag/` - PDF loading, chunking, embedding, indexing, and hybrid retrieval + reranking
 - `database/` - Postgres schema, loader, and SQL execution helpers
-- `streamlit.py` - chat UI that calls the API
+- `eval/` - golden-set evaluation harness (routing accuracy, grounding, LLM-judged faithfulness/helpfulness)
+- `streamlit_app.py` - chat UI that calls the API
 
 ## Repository layout
 
@@ -45,15 +53,15 @@ app/
   router.py        Question router for sql / retrieval / both
 
 graph/
-  state.py         Shared LangGraph state schema
+  state.py         Shared LangGraph state schema, incl. chat_history
   nodes.py         Planner, SQL, retrieval, reasoning, and report nodes
-  workflow.py      Compiles the LangGraph workflow
+  workflow.py      Compiles the LangGraph workflow with a MemorySaver checkpointer
 
 rag/
   chunking.py      PDF loading and text splitting
   embeddings.py    Embedding provider wrapper
   vectorstore.py   FAISS build/load/persist helpers
-  retriever.py     Top-k retrieval and context formatting
+  retriever.py     Hybrid (FAISS + BM25) retrieval, cross-encoder reranking, context formatting
 
 tools/
   sql_tool.py      Generates SQL, runs it safely, formats results
@@ -76,9 +84,16 @@ data/
   faiss_index/     Generated FAISS cache
 
 tests/
-  test_retrieval.py
+  test_retrieval.py       Retrieval pipeline sanity checks (needs API key + PDFs)
+  test_sql_guardrails.py  SQL safety guardrail suite — pure/offline, no DB or LLM needed
 
-streamlit.py       Streamlit chat frontend
+eval/
+  dataset.json         16 golden Q&A pairs across retrieval/sql/both/refusal, ground-truth verified
+  judge_prompt.txt      LLM-as-judge grading template
+  run_eval.py            Runs the real graph end-to-end and scores routing/grounding/faithfulness
+  results/                Timestamped raw results + latest_report.md
+
+streamlit_app.py   Streamlit chat frontend
 requirements.txt
 README.md
 ```
@@ -203,7 +218,7 @@ Example response:
 ## Running the Streamlit UI
 
 ```bash
-streamlit run streamlit.py
+streamlit run streamlit_app.py
 ```
 
 The UI expects the API server to already be running at `http://localhost:8000/ask`.
@@ -217,6 +232,42 @@ The UI expects the API server to already be running at `http://localhost:8000/as
 - The index is reused on later runs unless you delete the cache
 
 If you change PDFs, remove `data/faiss_index/` and restart to rebuild the index.
+
+### Hybrid retrieval + reranking
+
+Naive top-k vector search alone misses exact-term matches (product codes, precise policy
+phrasing) that embeddings blur together in semantic space. `rag/retriever.py` instead:
+
+1. Runs the query through **both** FAISS (vector/semantic) and BM25 (keyword) search, pulling a
+   wider candidate pool from each (`CANDIDATE_POOL_SIZE`, default 15).
+2. Fuses the two candidate lists with LangChain's `EnsembleRetriever` (reciprocal rank fusion,
+   deduplicated by content).
+3. Reranks the fused candidates with a local cross-encoder
+   (`cross-encoder/ms-marco-MiniLM-L-6-v2`), which scores each `(query, chunk)` pair jointly —
+   a much stronger relevance signal than independently-computed embedding distance — and keeps
+   only the final top-k.
+
+This is the standard retrieve-many/rerank-to-few pattern used in production RAG systems, not
+just single-signal top-k similarity search.
+
+## Conversational memory
+
+The graph is compiled with a LangGraph `MemorySaver` checkpointer (`graph/workflow.py`), keyed
+by a `session_id`. Pass the `session_id` from a previous `/ask` response back on the next
+request to continue that conversation — the planner, SQL agent, and report generator all get
+the last few turns folded into their prompts, so follow-ups like *"what about the West region
+instead?"* or *"and last quarter?"* resolve correctly instead of being classified/answered in
+isolation. Retrieval also folds the prior turn into the search text it embeds (not the displayed
+question) so document search benefits from context too, without an extra LLM call to rewrite
+the query.
+
+- Memory is in-process only (`MemorySaver`) — it resets when the server restarts, and won't work
+  across multiple replicas. A durable checkpointer (Postgres/SQLite) would be the next step for
+  a multi-instance deployment.
+- The Streamlit UI generates a `session_id` per browser session automatically and issues a fresh
+  one when you click "Clear chat history," so clearing the UI actually clears the agent's memory
+  too, not just what's displayed.
+- Omit `session_id` in the API and you get the old single-turn behavior.
 
 ## How SQL works
 
@@ -276,14 +327,47 @@ Quick checks:
 pytest tests/
 ```
 
-The retrieval tests need:
+- `tests/test_sql_guardrails.py` is **offline** — no DB, no LLM, no API key. It runs ~30
+  parametrized cases against `database/sql_executor.is_safe_sql`/`enforce_row_limit`: every
+  `FORBIDDEN_KEYWORDS` entry, comment-based LIMIT bypass (`--`, `/*`), stacked statements,
+  case-insensitivity, non-SELECT statement types, a regression test for the exact false-positive
+  the code explicitly guards against (`updated_at` vs. `update`), and a documented *known*
+  false-positive tradeoff (a string literal like `category = 'update'` gets blocked too — the
+  blocklist is a text scan, not a parser, and false positives are an accepted cost for never
+  having a false negative). This is the second of two independent defenses; the DB connection
+  itself uses a read-only user as the first (see `database/postgres.py`).
+- `tests/test_retrieval.py` needs PDFs in `data/pdfs/`, a valid API key, and the embedding
+  provider configured, since it exercises the real hybrid retrieval pipeline end-to-end.
 
-- PDFs in `data/pdfs/`
-- a valid API key
-- the embedding provider configured
+## Evaluation
+
+"It works" is backed by a golden-set evaluation harness, not just spot-checking answers by hand.
+
+```bash
+python -m eval.run_eval
+```
+
+For each of the 16 questions in `eval/dataset.json` (spanning `retrieval`, `sql`, `both`, and
+`refusal` categories — including the exact `Home & Kitchen` category/product_line regression
+case from above, with the correct answer independently verified against the live DB), this:
+
+1. Runs the real compiled graph end-to-end (same code path as the API).
+2. Checks **routing accuracy** — did the planner pick the expected source(s)?
+3. Checks **grounding** — does the answer contain the independently-verified ground-truth facts
+   (`must_contain`)? Deterministic, catches wrong numbers/names cheaply.
+4. Scores **faithfulness** and **helpfulness** via an LLM-as-judge call that only sees the
+   context the graph actually used, so it can catch hallucinated elaboration that happens to
+   also mention the right keywords.
+
+Results are written to `eval/results/latest_report.md` (a metrics table plus a "failures worth
+reading" section) and a timestamped raw JSON. Two LLM calls per question (system-under-test +
+judge) on top of the system's own 2-3 calls per question — on Gemini's free tier (20
+requests/day for `gemini-2.5-flash`), a full run can exceed the daily cap partway through; it'll
+report how far it got and can be re-run once the quota resets.
 
 ## Notes
 
 - `app/main1.py` is the older phase 1-only backend.
 - `data/faiss_index/` is generated, not source data.
 - The app is intentionally read-only for SQL execution.
+- Conversational memory (`MemorySaver`) is in-process only — see "Conversational memory" above.

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "ret-01",
+    "category": "retrieval",
+    "question": "Within how many days of purchase can most items be returned?",
+    "expected_route": "retrieval",
+    "must_contain": ["30 calendar days"],
+    "match_mode": "any",
+    "notes": "02_refund_policy.pdf section 2.1"
+  },
+  {
+    "id": "ret-02",
+    "category": "retrieval",
+    "question": "At what rate do full-time employees accrue PTO?",
+    "expected_route": "retrieval",
+    "must_contain": ["1.25 days"],
+    "match_mode": "any",
+    "notes": "01_hr_policy.pdf section 3.1"
+  },
+  {
+    "id": "ret-03",
+    "category": "retrieval",
+    "question": "How many complaints did the Electronics & Accessories line get in Q1 2024, and which product had the most?",
+    "expected_route": "retrieval",
+    "must_contain": ["412", "AuraSound"],
+    "match_mode": "all",
+    "notes": "03_complaints_electronics_q1.pdf"
+  },
+  {
+    "id": "ret-04",
+    "category": "retrieval",
+    "question": "What was the top complaint category for Home & Kitchen products in Q2 2024?",
+    "expected_route": "retrieval",
+    "must_contain": ["product defect", "malfunction"],
+    "match_mode": "any",
+    "notes": "04_complaints_home_kitchen_q2.pdf"
+  },
+  {
+    "id": "ret-05",
+    "category": "retrieval",
+    "question": "What was total net revenue for Q2 2024 according to the sales summary report?",
+    "expected_route": "retrieval",
+    "must_contain": ["48.3 million", "$48.3"],
+    "match_mode": "any",
+    "notes": "06_sales_summary_q2.pdf"
+  },
+  {
+    "id": "ret-06",
+    "category": "retrieval",
+    "question": "What ROI did the Fall Forward marketing campaign achieve?",
+    "expected_route": "retrieval",
+    "must_contain": ["4.0x", "4x"],
+    "match_mode": "any",
+    "notes": "07_marketing_summary_q3.pdf"
+  },
+  {
+    "id": "sql-01",
+    "category": "sql",
+    "question": "Which region had the highest total sales revenue?",
+    "expected_route": "sql",
+    "must_contain": ["Northeast"],
+    "match_mode": "all",
+    "notes": "Ground truth verified directly against DB: Northeast = 17597.16"
+  },
+  {
+    "id": "sql-02",
+    "category": "sql",
+    "question": "Which product had the highest total revenue in the Home & Kitchen category, and how many units were sold?",
+    "expected_route": "sql",
+    "must_contain": ["CopperCraft", "65"],
+    "match_mode": "all",
+    "notes": "This is the exact value-linking regression case from the README: 'Home & Kitchen' is a product_line, not a category. Ground truth: CopperCraft 10-Piece Cookware Set, 65 units."
+  },
+  {
+    "id": "sql-03",
+    "category": "sql",
+    "question": "How many complaints currently have a status of Open?",
+    "expected_route": "sql",
+    "must_contain": ["35"],
+    "match_mode": "all",
+    "notes": "Ground truth verified directly against DB."
+  },
+  {
+    "id": "sql-04",
+    "category": "sql",
+    "question": "How many customers are in the Midwest region?",
+    "expected_route": "sql",
+    "must_contain": ["58"],
+    "match_mode": "all",
+    "notes": "Ground truth verified directly against DB."
+  },
+  {
+    "id": "sql-05",
+    "category": "sql",
+    "question": "Which product line generated the most total sales revenue according to the database?",
+    "expected_route": "sql",
+    "must_contain": ["Home & Kitchen", "Home and Kitchen"],
+    "match_mode": "any",
+    "notes": "Ground truth verified directly against DB: Home & Kitchen = 22363.63, narrowly ahead of the other two lines."
+  },
+  {
+    "id": "both-01",
+    "category": "both",
+    "question": "What is the average satisfaction score for resolved complaints in our database, and how quickly does our refund policy say refunds get processed?",
+    "expected_route": "both",
+    "must_contain": ["3.38", "3-5 business days"],
+    "match_mode": "all",
+    "notes": "Needs a DB aggregate (complaints.satisfaction_score) AND a document fact (02_refund_policy.pdf)."
+  },
+  {
+    "id": "both-02",
+    "category": "both",
+    "question": "According to the sales database, which product line brings in the most revenue, and what does the Q2 sales summary report say drove that product line's growth?",
+    "expected_route": "both",
+    "must_contain": ["Home & Kitchen", "Mother's Day"],
+    "match_mode": "all",
+    "notes": "Needs a DB aggregate AND a document fact (06_sales_summary_q2.pdf mentions the Mother's Day campaign)."
+  },
+  {
+    "id": "ref-01",
+    "category": "refusal",
+    "question": "Who is the company's CEO and what is our total employee headcount?",
+    "expected_route": null,
+    "must_contain": ["don't have enough information", "not available", "cannot answer", "no information", "not contained"],
+    "match_mode": "any",
+    "notes": "Not present in either data source. System should refuse rather than fabricate a name/number."
+  },
+  {
+    "id": "ref-02",
+    "category": "refusal",
+    "question": "What was our total sales revenue in the year 2020?",
+    "expected_route": "sql",
+    "must_contain": ["don't have enough information", "no rows", "no data", "not available", "no results"],
+    "match_mode": "any",
+    "notes": "Sales data only covers Jan-Sep 2024 (verified against DB). System should say there's no data, not invent a number."
+  },
+  {
+    "id": "ref-03",
+    "category": "refusal",
+    "question": "What is our current stock price on the NYSE?",
+    "expected_route": null,
+    "must_contain": ["don't have enough information", "not available", "cannot answer", "no information", "not contained"],
+    "match_mode": "any",
+    "notes": "Completely out of scope for either data source."
+  }
+]

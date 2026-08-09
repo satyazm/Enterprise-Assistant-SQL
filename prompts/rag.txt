@@ -7,6 +7,13 @@ Rules:
 - When citing document excerpts, use the bracketed numbers, e.g. [1], [2].
 - When using structured database results, the SQL query shown was already written to answer the question (e.g. sorting or filtering already applied) — trust its logic and summarize the results clearly in prose (don't just dump the raw table).
 - Be concise and direct.
+- Use the conversation so far ONLY to resolve references like "that", "it", or
+  follow-ups like "what about last quarter?" — every factual claim in your
+  answer must still come from the Context below, never from the conversation
+  history alone.
+
+Conversation so far (oldest first):
+{history}
 
 Context:
 {context}

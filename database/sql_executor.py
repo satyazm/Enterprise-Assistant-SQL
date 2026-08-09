@@ -16,7 +16,7 @@ from database.postgres import get_engine
 
 FORBIDDEN_KEYWORDS = [
     "drop", "delete", "update", "insert", "alter", "truncate",
-    "grant", "revoke", "create", "attach", "copy", "--", ";--",
+    "grant", "revoke", "create", "attach", "copy",
 ]
 
 MAX_ROWS = 100
@@ -28,6 +28,13 @@ def is_safe_sql(sql: str) -> bool:
     normalized = sql.strip().lower()
 
     if not (normalized.startswith("select") or normalized.startswith("with")):
+        return False
+
+    # Comment markers aren't word-bounded, so they can't go through the
+    # keyword loop below (`\b` never matches around `-` or `/`). Checked
+    # separately: a comment could otherwise swallow the LIMIT clause that
+    # enforce_row_limit() appends as plain text.
+    if "--" in normalized or "/*" in normalized:
         return False
 
     for keyword in FORBIDDEN_KEYWORDS:

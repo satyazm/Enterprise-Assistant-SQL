@@ -62,7 +62,7 @@ def call_llm(prompt: str) -> str:
             raise EnvironmentError("GOOGLE_API_KEY not set in .env")
 
         model = ChatGoogleGenerativeAI(
-            model="gemini-3.5-flash",
+            model="gemini-2.5-flash",
             google_api_key=api_key,
         )
         response = model.invoke(prompt)
@@ -92,7 +92,13 @@ def ask(request: AskRequest):
 
     context = format_context(chunks)
     template = load_prompt_template()
-    prompt = template.format(context=context, question=request.question)
+    # rag.txt gained a {history} placeholder for Phase 3's multi-turn memory;
+    # this legacy phase-1 app is single-turn, so it always fills in "none".
+    prompt = template.format(
+        context=context,
+        question=request.question,
+        history="(no earlier turns in this conversation)",
+    )
 
     answer = call_llm(prompt)
 
