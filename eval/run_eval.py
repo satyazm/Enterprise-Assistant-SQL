@@ -87,22 +87,49 @@ def _judge(question: str, context: str, answer: str) -> dict:
         return {"faithfulness": None, "helpfulness": None, "rationale": None, "parse_error": f"{type(e).__name__}: {e}"}
 
 
+def _empty_result_shell(item: dict, error: str) -> dict:
+    """Same shape as a successful result, but with every scoring field
+    left as None/not-applicable so summarize() and the report writer can
+    treat it uniformly instead of needing error-specific branches."""
+    return {
+        "id": item["id"],
+        "category": item["category"],
+        "question": item["question"],
+        "expected_route": item.get("expected_route"),
+        "actual_route": None,
+        "route_correct": None,
+        "answer": "",
+        "sql_used": None,
+        "grounding": {"applicable": False, "passed": None, "hits": [], "misses": []},
+        "judge": {"faithfulness": None, "helpfulness": None, "rationale": None, "parse_error": None},
+        "latency_s": None,
+        "error": error,
+    }
+
+
 def run_item(item: dict) -> dict:
     t0 = time.perf_counter()
-    # Each golden question is independent, so it gets its own thread_id —
-    # the graph now requires one since it's compiled with a checkpointer
-    # (for multi-turn memory in normal use). Reusing item["id"] means a
-    # re-run with the same dataset reuses the same threads rather than
-    # leaking a new one into the checkpointer every time.
-    state = graph.invoke(
-        {
-            "question": item["question"],
-            "k": 4,
-            "sources": [],
-            "execution_path": [],
-        },
-        config={"configurable": {"thread_id": f"eval-{item['id']}"}},
-    )
+    try:
+        # Each golden question is independent, so it gets its own thread_id —
+        # the graph now requires one since it's compiled with a checkpointer
+        # (for multi-turn memory in normal use). Reusing item["id"] means a
+        # re-run with the same dataset reuses the same threads rather than
+        # leaking a new one into the checkpointer every time.
+        state = graph.invoke(
+            {
+                "question": item["question"],
+                "k": 4,
+                "sources": [],
+                "execution_path": [],
+            },
+            config={"configurable": {"thread_id": f"eval-{item['id']}"}},
+        )
+    except Exception as e:
+        # Most likely Gemini's daily quota (see app/llm.py) — one question
+        # hitting it shouldn't cost the results already collected from
+        # every question before it. Caller decides whether to keep going.
+        return _empty_result_shell(item, error=f"{type(e).__name__}: {str(e)[:300]}")
+
     latency_s = round(time.perf_counter() - t0, 2)
 
     actual_route = state.get("route")
@@ -113,7 +140,11 @@ def run_item(item: dict) -> dict:
     route_correct = None if expected_route is None else (actual_route == expected_route)
 
     grounding = _check_grounding(answer, item.get("must_contain", []), item.get("match_mode", "all"))
-    judge = _judge(item["question"], context, answer)
+
+    try:
+        judge = _judge(item["question"], context, answer)
+    except Exception as e:
+        judge = {"faithfulness": None, "helpfulness": None, "rationale": None, "parse_error": f"{type(e).__name__}: {str(e)[:200]}"}
 
     return {
         "id": item["id"],
@@ -127,6 +158,7 @@ def run_item(item: dict) -> dict:
         "grounding": grounding,
         "judge": judge,
         "latency_s": latency_s,
+        "error": None,
     }
 
 
@@ -141,15 +173,18 @@ def summarize(results: list) -> dict:
         by_category.setdefault(r["category"], []).append(r)
 
     def category_stats(items):
-        route_checked = [r for r in items if r["route_correct"] is not None]
-        grounding_checked = [r for r in items if r["grounding"]["applicable"]]
+        errored = [r for r in items if r.get("error")]
+        completed = [r for r in items if not r.get("error")]
+        route_checked = [r for r in completed if r["route_correct"] is not None]
+        grounding_checked = [r for r in completed if r["grounding"]["applicable"]]
         return {
             "n": len(items),
+            "errored": len(errored),
             "route_accuracy": _avg([1 if r["route_correct"] else 0 for r in route_checked]) if route_checked else None,
             "grounding_pass_rate": _avg([1 if r["grounding"]["passed"] else 0 for r in grounding_checked]) if grounding_checked else None,
-            "avg_faithfulness": _avg([r["judge"]["faithfulness"] for r in items]),
-            "avg_helpfulness": _avg([r["judge"]["helpfulness"] for r in items]),
-            "avg_latency_s": _avg([r["latency_s"] for r in items]),
+            "avg_faithfulness": _avg([r["judge"]["faithfulness"] for r in completed]),
+            "avg_helpfulness": _avg([r["judge"]["helpfulness"] for r in completed]),
+            "avg_latency_s": _avg([r["latency_s"] for r in completed]),
         }
 
     return {
@@ -177,6 +212,9 @@ def _write_markdown_report(results: list, summary: dict, path: Path):
     lines.append("| id | category | route (exp/actual) | grounding | faithfulness | helpfulness | latency (s) |")
     lines.append("|---|---|---|---|---|---|---|")
     for r in results:
+        if r.get("error"):
+            lines.append(f"| {r['id']} | {r['category']} | ERROR | - | - | - | - |")
+            continue
         route_str = f"{r['expected_route']} / {r['actual_route']}"
         grounding_str = "n/a" if not r["grounding"]["applicable"] else ("PASS" if r["grounding"]["passed"] else "FAIL")
         lines.append(
@@ -184,17 +222,31 @@ def _write_markdown_report(results: list, summary: dict, path: Path):
             f"{r['judge']['faithfulness']} | {r['judge']['helpfulness']} | {r['latency_s']} |"
         )
 
+    errored = [r for r in results if r.get("error")]
+    if errored:
+        lines.append("")
+        lines.append("## Questions that didn't complete")
+        lines.append("")
+        lines.append("Most likely Gemini's daily quota — re-run `python -m eval.run_eval` after it resets "
+                      "to fill these in (already-completed results above are untouched by a re-run).")
+        lines.append("")
+        for r in errored:
+            lines.append(f"- **{r['id']}** ({r['question']}): {r['error']}")
+
     lines.append("")
     lines.append("## Failures worth reading")
     lines.append("")
     failures = [
         r for r in results
-        if (r["route_correct"] is False)
-        or (r["grounding"]["applicable"] and not r["grounding"]["passed"])
-        or (r["judge"]["faithfulness"] is not None and r["judge"]["faithfulness"] < 4)
+        if not r.get("error")
+        and (
+            (r["route_correct"] is False)
+            or (r["grounding"]["applicable"] and not r["grounding"]["passed"])
+            or (r["judge"]["faithfulness"] is not None and r["judge"]["faithfulness"] < 4)
+        )
     ]
     if not failures:
-        lines.append("None — every question passed routing, grounding, and faithfulness checks.")
+        lines.append("None — every completed question passed routing, grounding, and faithfulness checks.")
     else:
         for r in failures:
             lines.append(f"### {r['id']}: {r['question']}")
@@ -208,35 +260,53 @@ def _write_markdown_report(results: list, summary: dict, path: Path):
     path.write_text("\n".join(lines))
 
 
+def _save(results: list, raw_path: Path, report_path: Path):
+    """Writes both output files from whatever's been collected so far —
+    called after every question, not just at the end, so a quota cutoff
+    mid-run still leaves real results on disk instead of nothing."""
+    summary = summarize(results)
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    raw_path.write_text(json.dumps({"summary": summary, "results": results}, indent=2))
+    _write_markdown_report(results, summary, report_path)
+    return summary
+
+
 def main():
     dataset = _load_dataset()
     print(f"Running eval on {len(dataset)} questions...\n")
+
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    raw_path = RESULTS_DIR / f"results_{timestamp}.json"
+    report_path = RESULTS_DIR / "latest_report.md"
 
     results = []
     for item in dataset:
         print(f"[{item['id']}] {item['question']}")
         result = run_item(item)
         results.append(result)
-        route_flag = "-" if result["route_correct"] is None else ("PASS" if result["route_correct"] else "FAIL")
-        ground_flag = "n/a" if not result["grounding"]["applicable"] else ("PASS" if result["grounding"]["passed"] else "FAIL")
-        print(
-            f"    route={route_flag} grounding={ground_flag} "
-            f"faithfulness={result['judge']['faithfulness']} helpfulness={result['judge']['helpfulness']} "
-            f"latency={result['latency_s']}s\n"
-        )
+
+        if result.get("error"):
+            print(f"    ERROR: {result['error']}\n")
+        else:
+            route_flag = "-" if result["route_correct"] is None else ("PASS" if result["route_correct"] else "FAIL")
+            ground_flag = "n/a" if not result["grounding"]["applicable"] else ("PASS" if result["grounding"]["passed"] else "FAIL")
+            print(
+                f"    route={route_flag} grounding={ground_flag} "
+                f"faithfulness={result['judge']['faithfulness']} helpfulness={result['judge']['helpfulness']} "
+                f"latency={result['latency_s']}s\n"
+            )
+
+        # Save after every question, not just at the end — a quota cutoff
+        # partway through should still leave real results on disk.
+        _save(results, raw_path, report_path)
 
     summary = summarize(results)
-
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    raw_path = RESULTS_DIR / f"results_{timestamp}.json"
-    raw_path.write_text(json.dumps({"summary": summary, "results": results}, indent=2))
-
-    report_path = RESULTS_DIR / "latest_report.md"
-    _write_markdown_report(results, summary, report_path)
+    errored = summary["overall"]["errored"]
 
     print("=" * 60)
     print("OVERALL:", json.dumps(summary["overall"], indent=2))
+    if errored:
+        print(f"\n{errored} question(s) didn't complete (see 'Questions that didn't complete' in the report) — re-run to fill them in.")
     print(f"\nRaw results: {raw_path}")
     print(f"Report:      {report_path}")
 

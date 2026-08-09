@@ -44,8 +44,16 @@ def get_engine():
     return _engine
 
 
-# Human-readable schema description injected into the SQL-generation prompt.
-# Keep this in sync with database/sample_db.sql if you change columns.
+# Hand-written schema description, kept as a FALLBACK for when live
+# introspection (database/schema_introspection.py) isn't available — e.g.
+# the DB is briefly unreachable, or a permission issue blocks reading
+# information_schema. Not the primary source anymore, but deliberately
+# kept rather than deleted: it's a second, independent description that
+# keeps SQL generation working even if introspection breaks, and it's
+# useful as a plain-English reference when reading this file.
+#
+# If you change columns in database/sample_db.sql, keep this in sync too —
+# unlike the live path, this one won't notice on its own.
 SCHEMA_DESCRIPTION = """
 Table: customers
   customer_id (VARCHAR, PK), first_name, last_name, email, phone,
@@ -54,11 +62,6 @@ Table: customers
 Table: products
   product_id (VARCHAR, PK), product_name, product_line, category,
   unit_price (NUMERIC), unit_cost (NUMERIC), margin_pct (NUMERIC)
-
-  Note: product_line is a broad grouping (e.g. "Home & Kitchen"); category is a
-  more specific subcategory within it (e.g. "Cookware"). If the question's exact
-  wording appears in the "Detected value matches" hints below, use those exact
-  values -- they're pulled live from the database and are more reliable than guessing.
 
 Table: sales
   sale_id (VARCHAR, PK), sale_date (DATE), customer_id (VARCHAR, FK -> customers),
@@ -71,4 +74,15 @@ Table: complaints
   product_id (VARCHAR, FK -> products), product_name, product_line, category,
   channel, status, resolution_days (NUMERIC, nullable - NULL means unresolved),
   satisfaction_score (NUMERIC, nullable - NULL means unresolved)
+""".strip()
+
+# Business-domain knowledge that no amount of introspecting information_schema
+# can recover — it's not structure, it's semantics. Appended to whichever
+# schema description (live or static fallback) actually gets used, so this
+# grounding survives regardless of which path is active.
+SCHEMA_NOTES = """
+Note: product_line is a broad grouping (e.g. "Home & Kitchen"); category is a
+more specific subcategory within it (e.g. "Cookware"). If the question's exact
+wording appears in the "Detected value matches" hints below, use those exact
+values -- they're pulled live from the database and are more reliable than guessing.
 """.strip()

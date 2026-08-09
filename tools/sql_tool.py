@@ -13,7 +13,8 @@ prompt text that would go stale as the data changes.
 from pathlib import Path
 
 from app.llm import call_llm
-from database.postgres import SCHEMA_DESCRIPTION
+from database.postgres import SCHEMA_DESCRIPTION, SCHEMA_NOTES
+from database.schema_introspection import get_live_schema_description
 from database.sql_executor import execute_sql, format_sql_results
 from database.schema_values import find_relevant_values, format_value_hints
 
@@ -24,6 +25,21 @@ def _load_sql_prompt_template() -> str:
     if not SQL_PROMPT_PATH.exists():
         raise FileNotFoundError(f"Prompt template not found: {SQL_PROMPT_PATH}")
     return SQL_PROMPT_PATH.read_text()
+
+
+def _get_schema_description() -> str:
+    """Prefers a live schema introspected fresh from the DB, so it can
+    never drift from reality. Falls back to the hand-maintained
+    SCHEMA_DESCRIPTION if introspection fails for any reason (DB briefly
+    unreachable, permission issue) — SQL generation should degrade to a
+    possibly-stale schema rather than fail outright. SCHEMA_NOTES (business
+    semantics introspection can't derive on its own) is appended either
+    way."""
+    try:
+        schema = get_live_schema_description()
+    except Exception:
+        schema = SCHEMA_DESCRIPTION
+    return f"{schema}\n\n{SCHEMA_NOTES}"
 
 
 def _clean_generated_sql(raw: str) -> str:
@@ -58,7 +74,7 @@ def answer_from_sql(question: str, history: str = "(no earlier turns in this con
     value_matches = find_relevant_values(question)
     value_hints = format_value_hints(value_matches)
 
-    prompt = template.format(schema=SCHEMA_DESCRIPTION, value_hints=value_hints, question=question, history=history)
+    prompt = template.format(schema=_get_schema_description(), value_hints=value_hints, question=question, history=history)
 
     generated = call_llm(prompt)
     sql = _clean_generated_sql(generated)

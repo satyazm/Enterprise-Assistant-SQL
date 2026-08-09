@@ -67,11 +67,12 @@ tools/
   sql_tool.py      Generates SQL, runs it safely, formats results
 
 database/
-  sample_db.sql    Postgres schema and indexes
-  load_data.py     Loads CSVs into the database
-  postgres.py      DB connection and schema description
-  schema_values.py Live categorical-value index + semantic matching hints
-  sql_executor.py  Safety checks and SQL execution helpers
+  sample_db.sql          Postgres schema and indexes
+  load_data.py           Loads CSVs into the database
+  postgres.py            DB connection, static fallback schema, and SCHEMA_NOTES
+  schema_introspection.py Live table/column/PK/FK schema, queried fresh from pg_catalog
+  schema_values.py       Live categorical-value index + semantic matching hints
+  sql_executor.py        Safety checks and SQL execution helpers
 
 prompts/
   rag.txt          Final grounded-answer prompt
@@ -276,12 +277,44 @@ the query.
   (like `products.product_line`, `products.category`, `customers.region`, etc.)
 - The SQL agent embeds the user question, semantically matches likely value mentions,
   and injects those matches as `value_hints` into `prompts/sql.txt`
-- `tools/sql_tool.py` asks the LLM for a single read-only `SELECT` grounded by those hints
+- `database/schema_introspection.py` builds the table/column/type/PK/FK part of the schema
+  description fresh from Postgres's own catalogs on every call (see below)
+- `tools/sql_tool.py` asks the LLM for a single read-only `SELECT` grounded by that schema plus
+  the value hints
 - `database/sql_executor.py` blocks unsafe SQL and enforces a row limit
 - `database/postgres.py` connects using the read-only DB user
 
 This avoids brittle hardcoded value lists and helps prevent column/value mismatches like
 using `"Home & Kitchen"` as `category` when it belongs to `product_line` in the current data.
+
+### Automatic schema introspection
+
+The SQL-generation prompt needs two different kinds of schema knowledge, and only one of them
+can actually be automated:
+
+- **Structure** (tables, columns, types, primary/foreign keys) — this is discoverable, so
+  `database/schema_introspection.get_live_schema_description()` queries it fresh from Postgres's
+  catalogs on every call. Add a column or a table and the very next question already sees it —
+  nothing to hand-edit, nothing to go stale.
+- **Business semantics** (e.g. *"`product_line` is broader than `category`"*) — this isn't
+  discoverable from any catalog; it's domain knowledge someone has to write down once. That lives
+  in `database/postgres.py`'s `SCHEMA_NOTES` and gets appended after whichever schema description
+  (live or fallback) is actually used.
+
+`tools/sql_tool._get_schema_description()` tries the live path first and falls back to the
+hand-written `SCHEMA_DESCRIPTION` (also still in `database/postgres.py`, kept rather than deleted)
+if introspection fails for any reason — e.g. the DB is briefly unreachable — so SQL generation
+degrades to a possibly-stale schema instead of failing outright.
+
+One non-obvious wrinkle: PK/FK detection deliberately queries `pg_catalog` (`pg_constraint`,
+`pg_attribute`) rather than `information_schema.table_constraints`. That view only returns rows
+for a role with some privilege *beyond* plain `SELECT` — a documented Postgres behavior — so it's
+silently empty for the read-only user this app always connects as, and every column would look
+like a non-key column. `pg_catalog`'s own tables don't have that restriction.
+
+```bash
+python -m database.schema_introspection
+```
 
 ### SQL value-linking smoke test
 
