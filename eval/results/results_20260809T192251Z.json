@@ -1,0 +1,497 @@
+{
+  "summary": {
+    "overall": {
+      "n": 16,
+      "errored": 0,
+      "route_accuracy": 0.93,
+      "grounding_pass_rate": 0.94,
+      "avg_faithfulness": 4.94,
+      "avg_helpfulness": 4.69,
+      "avg_latency_s": 6.7
+    },
+    "by_category": {
+      "retrieval": {
+        "n": 6,
+        "errored": 0,
+        "route_accuracy": 1,
+        "grounding_pass_rate": 1,
+        "avg_faithfulness": 5,
+        "avg_helpfulness": 5,
+        "avg_latency_s": 3.71
+      },
+      "sql": {
+        "n": 5,
+        "errored": 0,
+        "route_accuracy": 1,
+        "grounding_pass_rate": 1,
+        "avg_faithfulness": 5,
+        "avg_helpfulness": 5,
+        "avg_latency_s": 7.68
+      },
+      "both": {
+        "n": 2,
+        "errored": 0,
+        "route_accuracy": 1,
+        "grounding_pass_rate": 0.5,
+        "avg_faithfulness": 4.5,
+        "avg_helpfulness": 5,
+        "avg_latency_s": 10.14
+      },
+      "refusal": {
+        "n": 3,
+        "errored": 0,
+        "route_accuracy": 0,
+        "grounding_pass_rate": 1,
+        "avg_faithfulness": 5,
+        "avg_helpfulness": 3.33,
+        "avg_latency_s": 8.75
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "ret-01",
+      "category": "retrieval",
+      "question": "Within how many days of purchase can most items be returned?",
+      "expected_route": "retrieval",
+      "actual_route": "retrieval",
+      "route_correct": true,
+      "answer": "Most items may be returned within 30 calendar days of the original purchase date, with a valid receipt or proof of purchase, as stated in [2].",
+      "sql_used": null,
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "30 calendar days"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly quotes a sentence from the context in [2] that explicitly addresses the question about the return window for most items.",
+        "parse_error": null
+      },
+      "latency_s": 11.09,
+      "error": null
+    },
+    {
+      "id": "ret-02",
+      "category": "retrieval",
+      "question": "At what rate do full-time employees accrue PTO?",
+      "expected_route": "retrieval",
+      "actual_route": "retrieval",
+      "route_correct": true,
+      "answer": "Full-time employees accrue PTO at a rate of 1.25 days per month of service, up to a maximum of 15 days per calendar year, as stated in [1]. Additionally, employees with more than 5 years of tenure accrue an additional 0.25 days per month, as noted in [1].",
+      "sql_used": null,
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "1.25 days"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly quotes and accurately summarizes the relevant information from the provided context in [1] regarding full-time employees' PTO accrual rate.",
+        "parse_error": null
+      },
+      "latency_s": 1.55,
+      "error": null
+    },
+    {
+      "id": "ret-03",
+      "category": "retrieval",
+      "question": "How many complaints did the Electronics & Accessories line get in Q1 2024, and which product had the most?",
+      "expected_route": "retrieval",
+      "actual_route": "retrieval",
+      "route_correct": true,
+      "answer": "The Electronics & Accessories product line received 412 complaints in Q1 2024. The product with the most complaints was not explicitly stated to be a specific product, but the increase in complaints was primarily attributed to the launch of the AuraSound WB-200 wireless earbuds and associated Bluetooth pairing issues. The top complaint category was \"Product defect / malfunction\" with 168 complaints (41%).",
+      "sql_used": null,
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "412",
+          "AuraSound"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer is fully grounded in the provided context and clearly addresses the question by stating the number of complaints and the product associated with the increase in complaints.",
+        "parse_error": null
+      },
+      "latency_s": 1.92,
+      "error": null
+    },
+    {
+      "id": "ret-04",
+      "category": "retrieval",
+      "question": "What was the top complaint category for Home & Kitchen products in Q2 2024?",
+      "expected_route": "retrieval",
+      "actual_route": "retrieval",
+      "route_correct": true,
+      "answer": "The top complaint category for Home & Kitchen products in Q2 2024 was \"Product defect / malfunction\" with 94 complaints, accounting for 33% of the total complaints [1].",
+      "sql_used": null,
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "product defect",
+          "malfunction"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer accurately quotes the top complaint category and its frequency from the provided context document excerpt [1].",
+        "parse_error": null
+      },
+      "latency_s": 1.06,
+      "error": null
+    },
+    {
+      "id": "ret-05",
+      "category": "retrieval",
+      "question": "What was total net revenue for Q2 2024 according to the sales summary report?",
+      "expected_route": "retrieval",
+      "actual_route": "retrieval",
+      "route_correct": true,
+      "answer": "Total net revenue for Q2 2024 was $48.3 million, according to [1].",
+      "sql_used": null,
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "48.3 million",
+          "$48.3"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly quotes the total net revenue for Q2 2024 from the provided context in document excerpt [1].",
+        "parse_error": null
+      },
+      "latency_s": 1.24,
+      "error": null
+    },
+    {
+      "id": "ret-06",
+      "category": "retrieval",
+      "question": "What ROI did the Fall Forward marketing campaign achieve?",
+      "expected_route": "retrieval",
+      "actual_route": "retrieval",
+      "route_correct": true,
+      "answer": "The \"Fall Forward\" campaign achieved a 4.0x ROI, with $2.4 million in media spend and $9.7 million in attributed revenue [1], [3].",
+      "sql_used": null,
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "4.0x"
+        ],
+        "misses": [
+          "4x"
+        ]
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly quotes specific details from the context, including the ROI, media spend, and attributed revenue for the Fall Forward campaign, fully addressing the question.",
+        "parse_error": null
+      },
+      "latency_s": 5.43,
+      "error": null
+    },
+    {
+      "id": "sql-01",
+      "category": "sql",
+      "question": "Which region had the highest total sales revenue?",
+      "expected_route": "sql",
+      "actual_route": "sql",
+      "route_correct": true,
+      "answer": "The Northeast region had the highest total sales revenue, with a total of $17,597.16.",
+      "sql_used": "SELECT region, SUM(line_total) AS total_revenue FROM sales GROUP BY region ORDER BY total_revenue DESC LIMIT 1",
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "Northeast"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly quotes the region and total revenue from the provided SQL results, fully addressing the question with faithful information.",
+        "parse_error": null
+      },
+      "latency_s": 7.35,
+      "error": null
+    },
+    {
+      "id": "sql-02",
+      "category": "sql",
+      "question": "Which product had the highest total revenue in the Home & Kitchen category, and how many units were sold?",
+      "expected_route": "sql",
+      "actual_route": "sql",
+      "route_correct": true,
+      "answer": "The product with the highest total revenue in the Home & Kitchen category is the CopperCraft 10-Piece Cookware Set, with a total revenue of $9,051.88 and 65 units sold.",
+      "sql_used": "SELECT product_name, SUM(line_total) AS total_revenue, SUM(quantity) AS units_sold \nFROM sales \nWHERE product_line = 'Home & Kitchen' \nGROUP BY product_name \nORDER BY total_revenue DESC \nLIMIT 1",
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "CopperCraft",
+          "65"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly quotes the results from the provided SQL query, accurately stating the product with the highest total revenue and the corresponding units sold.",
+        "parse_error": null
+      },
+      "latency_s": 8.53,
+      "error": null
+    },
+    {
+      "id": "sql-03",
+      "category": "sql",
+      "question": "How many complaints currently have a status of Open?",
+      "expected_route": "sql",
+      "actual_route": "sql",
+      "route_correct": true,
+      "answer": "There are 35 complaints that currently have a status of Open.",
+      "sql_used": "SELECT COUNT(*) FROM complaints WHERE status = 'Open'",
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "35"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly reflects the result of the SQL query provided in the context, accurately stating the count of open complaints as 35.",
+        "parse_error": null
+      },
+      "latency_s": 7.28,
+      "error": null
+    },
+    {
+      "id": "sql-04",
+      "category": "sql",
+      "question": "How many customers are in the Midwest region?",
+      "expected_route": "sql",
+      "actual_route": "sql",
+      "route_correct": true,
+      "answer": "There are 58 customers in the Midwest region.",
+      "sql_used": "SELECT COUNT(customer_id) FROM customers WHERE region = 'Midwest'",
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "58"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly reports the count from the provided SQL query results without adding any unsupported information.",
+        "parse_error": null
+      },
+      "latency_s": 7.71,
+      "error": null
+    },
+    {
+      "id": "sql-05",
+      "category": "sql",
+      "question": "Which product line generated the most total sales revenue according to the database?",
+      "expected_route": "sql",
+      "actual_route": "sql",
+      "route_correct": true,
+      "answer": "The product line that generated the most total sales revenue is Home & Kitchen, with a total revenue of $22,363.63.",
+      "sql_used": "SELECT product_line, SUM(line_total) AS total_revenue FROM sales GROUP BY product_line ORDER BY total_revenue DESC LIMIT 1",
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "Home & Kitchen"
+        ],
+        "misses": [
+          "Home and Kitchen"
+        ]
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly reflects the provided SQL results, accurately stating the product line with the highest total sales revenue.",
+        "parse_error": null
+      },
+      "latency_s": 7.52,
+      "error": null
+    },
+    {
+      "id": "both-01",
+      "category": "both",
+      "question": "What is the average satisfaction score for resolved complaints in our database, and how quickly does our refund policy say refunds get processed?",
+      "expected_route": "both",
+      "actual_route": "both",
+      "route_correct": true,
+      "answer": "The average satisfaction score for resolved complaints with refunds is 3.54, and the average time to process refunds is approximately 6.72 days.",
+      "sql_used": "SELECT AVG(satisfaction_score) AS average_satisfaction_score, AVG(resolution_days) AS average_refund_processing_time \nFROM complaints \nWHERE status = 'Resolved - Refund'",
+      "grounding": {
+        "applicable": true,
+        "passed": false,
+        "hits": [],
+        "misses": [
+          "3.3",
+          "3-5 business days"
+        ]
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The answer directly references the provided SQL query results for the average satisfaction score and refund processing time, making it fully grounded in the given context.",
+        "parse_error": null
+      },
+      "latency_s": 6.45,
+      "error": null
+    },
+    {
+      "id": "both-02",
+      "category": "both",
+      "question": "According to the sales database, which product line brings in the most revenue, and what does the Q2 sales summary report say drove that product line's growth?",
+      "expected_route": "both",
+      "actual_route": "both",
+      "route_correct": true,
+      "answer": "The sales database shows that the Home & Kitchen product line brings in the most revenue, with a total revenue of $7,348.32. According to the Q2 sales summary report [1], the growth in the Home & Kitchen product line was driven by a strong Mother's Day promotional campaign.",
+      "sql_used": "SELECT product_line, SUM(line_total) AS total_revenue \nFROM sales \nWHERE EXTRACT(QUARTER FROM sale_date) = 2 \nGROUP BY product_line \nORDER BY total_revenue DESC \nLIMIT 1",
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "Home & Kitchen",
+          "Mother's Day"
+        ],
+        "misses": []
+      },
+      "judge": {
+        "faithfulness": 4,
+        "helpfulness": 5,
+        "rationale": "The answer accurately identifies the top-revenue product line and cites a relevant factor from the Q2 sales summary report, but incorrectly states the total revenue due to a discrepancy between the provided SQL results and the document excerpts.",
+        "parse_error": null
+      },
+      "latency_s": 13.83,
+      "error": null
+    },
+    {
+      "id": "ref-01",
+      "category": "refusal",
+      "question": "Who is the company's CEO and what is our total employee headcount?",
+      "expected_route": null,
+      "actual_route": "both",
+      "route_correct": null,
+      "answer": "I don't have enough information in the provided data to answer that.",
+      "sql_used": null,
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "don't have enough information"
+        ],
+        "misses": [
+          "not available",
+          "cannot answer",
+          "no information",
+          "not contained"
+        ]
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 0,
+        "rationale": "The answer is faithful because it accurately states that the provided context does not contain information about the CEO or total employee headcount, but it is not helpful because it does not provide any relevant information or insight from the context.",
+        "parse_error": null
+      },
+      "latency_s": 12.18,
+      "error": null
+    },
+    {
+      "id": "ref-02",
+      "category": "refusal",
+      "question": "What was our total sales revenue in the year 2020?",
+      "expected_route": "sql",
+      "actual_route": "retrieval",
+      "route_correct": false,
+      "answer": "I don't have enough information in the provided data to answer that.",
+      "sql_used": null,
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "don't have enough information"
+        ],
+        "misses": [
+          "no rows",
+          "no data",
+          "not available",
+          "no results",
+          "no sales",
+          "none recorded",
+          "not recorded"
+        ]
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The system's answer is fully grounded in the context and correctly addresses the question by stating it doesn't have enough information to provide the total sales revenue for the year 2020.",
+        "parse_error": null
+      },
+      "latency_s": 7.46,
+      "error": null
+    },
+    {
+      "id": "ref-03",
+      "category": "refusal",
+      "question": "What is our current stock price on the NYSE?",
+      "expected_route": null,
+      "actual_route": "sql",
+      "route_correct": null,
+      "answer": "I don't have enough information in the provided data to answer that.",
+      "sql_used": null,
+      "grounding": {
+        "applicable": true,
+        "passed": true,
+        "hits": [
+          "don't have enough information"
+        ],
+        "misses": [
+          "not available",
+          "cannot answer",
+          "no information",
+          "not contained"
+        ]
+      },
+      "judge": {
+        "faithfulness": 5,
+        "helpfulness": 5,
+        "rationale": "The system's answer is fully grounded in the context and clearly addresses the question by stating it doesn't have enough information to provide an answer.",
+        "parse_error": null
+      },
+      "latency_s": 6.6,
+      "error": null
+    }
+  ]
+}

@@ -15,22 +15,47 @@ For every question in eval/dataset.json, this:
      sees the context the graph actually used, so it can catch hallucinated
      elaboration that happens to also mention the right keywords.
 
-Two LLM calls per question (system-under-test + judge). Requires the DB
-and a valid API key to be configured, same as running the app normally.
+The judge always runs on Groq (see app/llm.call_llm_groq) — keeps grading
+traffic off the system's own quota, and judging from a different model
+family than the one being judged avoids a model favoring its own family's
+outputs.
+
+The system-under-test (planner/SQL/report — the actual graph nodes)
+defaults to Groq too, via LLM_PROVIDER=groq set below *before* graph.workflow
+is imported (app/llm.py reads LLM_PROVIDER once at import time). This is a
+deliberate tradeoff, not a hidden one: Gemini's free tier is 20
+requests/day, and a 16-question run needs ~2-3 system calls per question —
+one real day of incidental testing reliably exhausts it before a full run
+completes, which happened repeatedly building this harness. Running
+system-under-test on Groq means these numbers describe the graph's LOGIC
+(routing, grounding, SQL correctness), not literally the Gemini-backed
+app a user would hit — treat that distinction as real, not a footnote.
+
+To evaluate the actual deployed (Gemini) path once quota allows, override
+explicitly:
+    LLM_PROVIDER=gemini python -m eval.run_eval
 
 Run with:
     python -m eval.run_eval
 """
 
 import json
+import os
 import re
 import statistics
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from app.llm import call_llm
-from graph.workflow import graph
+# Must happen before `from graph.workflow import graph` below, since
+# app/llm.py reads LLM_PROVIDER into a module-level constant at import
+# time — setting it after that import would be a no-op. setdefault (not a
+# plain assignment) so `LLM_PROVIDER=gemini python -m eval.run_eval`
+# still works to force the real deployed path.
+os.environ.setdefault("LLM_PROVIDER", "groq")
+
+from app.llm import call_llm_groq  # noqa: E402
+from graph.workflow import graph  # noqa: E402
 
 DATASET_PATH = Path("eval/dataset.json")
 JUDGE_PROMPT_PATH = Path("eval/judge_prompt.txt")
@@ -74,7 +99,7 @@ def _judge(question: str, context: str, answer: str) -> dict:
     truncated_context = (context or "")[:MAX_JUDGE_CONTEXT_CHARS]
     prompt = template.format(question=question, context=truncated_context or "(no context — retrieval/SQL returned nothing)", answer=answer)
 
-    raw = call_llm(prompt)
+    raw = call_llm_groq(prompt)
     try:
         parsed = _clean_json(raw)
         return {

@@ -15,8 +15,11 @@ System's answer:
 Score on two axes:
 - faithfulness (0-5): does every concrete claim in the answer trace back to the context above?
   5 = fully grounded, 0 = mostly fabricated or unsupported by the context.
-- helpfulness (0-5): does the answer clearly and completely address the question using what's
-  in the context? 5 = excellent and complete, 0 = useless, off-topic, or non-responsive.
+- helpfulness (0-5): does the answer serve the user well GIVEN what the context actually
+  supports? If the context genuinely doesn't contain the answer and the system correctly says
+  so instead of guessing, that IS the correct, maximally helpful response — score it 5, not 0.
+  Only score helpfulness low if the system failed to use context that WAS sufficient, answered
+  a different question than asked, or was needlessly vague despite having what it needed.
 
 Respond with ONLY valid JSON, no markdown fences, no commentary, in exactly this shape:
 {{"faithfulness": <int 0-5>, "helpfulness": <int 0-5>, "rationale": "<one sentence, specific>"}}

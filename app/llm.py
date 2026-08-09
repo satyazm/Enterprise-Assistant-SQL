@@ -4,6 +4,13 @@ app/llm.py
 Shared LLM dispatcher, used by both the RAG pipeline and the SQL agent
 (and, from Phase 3 onward, by every LangGraph node). Kept in one place
 so provider swaps only happen here.
+
+LLM_PROVIDER supports "gemini" (default, what the deployed app actually
+runs on), "openai", and "groq". The "groq" option exists mainly so
+eval/run_eval.py can point the *whole* graph — not just its judge — at
+Groq when Gemini's free-tier quota is the bottleneck, at the cost of no
+longer evaluating the exact model the app is deployed on. See that
+module's docstring for the tradeoff.
 """
 
 import os
@@ -25,13 +32,22 @@ BASE_BACKOFF_SECONDS = 8
 _RETRY_DELAY_RE = re.compile(r"retry(?:Delay)?['\"]?[:\s]+['\"]?(\d+(?:\.\d+)?)s", re.IGNORECASE)
 
 
+_NON_RETRYABLE_MARKERS = (
+    "GenerateRequestsPerDay",  # Gemini: requests/day quota
+    "tokens per day",  # Groq: TPD (tokens per day) quota
+    "(TPD)",
+)
+
+
 def _is_retryable(error: Exception) -> bool:
     message = str(error)
 
     # A per-day quota error won't resolve within this process's lifetime —
-    # retrying just burns the backoff window for nothing. Per-minute limits
-    # and transient 5xx errors are worth retrying; per-day ones aren't.
-    if "GenerateRequestsPerDay" in message:
+    # retrying just burns the backoff window sleeping through a cap that
+    # won't lift for hours. Per-minute limits and transient 5xx errors are
+    # worth retrying; per-day ones aren't, regardless of which provider's
+    # wording they show up in.
+    if any(marker in message for marker in _NON_RETRYABLE_MARKERS):
         return False
 
     return any(marker in message for marker in ("429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"))
@@ -91,5 +107,31 @@ def call_llm(prompt: str) -> str:
         response = _invoke_with_retry(model, prompt)
         return response.content
 
+    elif LLM_PROVIDER == "groq":
+        return call_llm_groq(prompt)
+
     else:
         raise ValueError(f"Unknown LLM_PROVIDER: {LLM_PROVIDER}")
+
+
+def call_llm_groq(prompt: str) -> str:
+    """Separate from call_llm() on purpose: this isn't a provider option
+    behind LLM_PROVIDER, it's a dedicated path for eval/run_eval.py's
+    LLM-as-judge specifically, so grading traffic doesn't compete with the
+    system-under-test's own Gemini quota — and, as a side benefit, judging
+    from a different model family than the one being judged avoids a model
+    being biased toward favoring its own family's outputs.
+
+    GROQ_MODEL defaults to a current Groq-hosted model but is overridable
+    in .env, since which models Groq hosts changes over time — check
+    https://console.groq.com/docs/models if the default starts 404ing."""
+    from langchain_groq import ChatGroq
+
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        raise EnvironmentError("GROQ_API_KEY not set in .env")
+
+    model_name = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+    model = ChatGroq(model=model_name, groq_api_key=api_key)
+    response = _invoke_with_retry(model, prompt)
+    return response.content
